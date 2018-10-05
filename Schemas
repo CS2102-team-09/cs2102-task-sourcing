@@ -1,0 +1,15 @@
+
+-- task is a weak identity, so I merged task and manage
+CREATE TABLE task_managed_by (
+  task_id CHAR(8) UNIQUE,
+  user_id CHR(8),
+  expire_time DATE,
+  bit_points NUMERIC
+  FOREIGN KEY (user_id) REFERENCES users(user_id)
+);
+
+CREATE TABLE users (
+  user_id CHAR(8) PRIMARY KEY,
+  points NUMERIC DEFAULT 0,
+  is_admin BIT DEFAULT 0
+);
