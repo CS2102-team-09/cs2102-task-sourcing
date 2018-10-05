@@ -1,5 +1,9 @@
+CREATE TABLE users (
+  user_id CHAR(8) PRIMARY KEY,
+  points NUMERIC DEFAULT 0,
+  is_admin BOOL DEFAULT False
+);
 
--- task is a weak identity, so I merged task and manage
 CREATE TABLE task_managed_by (
   task_id CHAR(8) NOT NULL UNIQUE,
   user_id CHAR(8),
@@ -9,7 +13,7 @@ CREATE TABLE task_managed_by (
   end_time NUMERIC,
   description VARCHAR(64) NOT NULL,
 
-  FOREIGN KEY (user_id) REFERENCES users(user_id),
+  FOREIGN KEY (user_id) REFERENCES users(user_id) ON UPDATE CASCADE ON DELETE CASCADE,
   PRIMARY KEY (task_id, user_id)
 );
 
@@ -21,10 +25,4 @@ CREATE TABLE task_bid_by (
   FOREIGN KEY (user_id) REFERENCES users(user_id) ON UPDATE CASCADE ON DELETE CASCADE,
   FOREIGN KEY (task_id) REFERENCES task_managed_by(task_id) ON UPDATE CASCADE ON DELETE CASCADE,
   PRIMARY KEY (user_id, task_id)
-);
-
-CREATE TABLE users (
-  user_id CHAR(8) PRIMARY KEY,
-  points NUMERIC DEFAULT 0,
-  is_admin BOOL DEFAULT False
 );
