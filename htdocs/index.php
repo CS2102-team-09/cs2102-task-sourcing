@@ -13,7 +13,8 @@ if (isset($_SESSION['login_user'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+          integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 
 
     <style>
@@ -30,44 +31,44 @@ if (isset($_SESSION['login_user'])) {
     </style>
 </head>
 <body>
-<div class="container">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">TaskSource</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">TaskSource</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Bid a Task <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="createtask.php">Create a Task <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Manage Tasks <span class="sr-only">(current)</span></a>
+            </li>
+        </ul>
+
+        <button class="btn btn-outline-success my-2 my-sm-0" type="button" data-toggle="modal"
+                data-target="#loginModel">Login
         </button>
-
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Bid Tasks <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Manage Tasks <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Help <span class="sr-only">(current)</span></a>
-                </li>
-            </ul>
-
-            <button class="btn btn-outline-success my-2 my-sm-0" type="button" data-toggle="modal"
-                    data-target="#loginModel">Login
-            </button>
-            <button class="btn btn-success my-2 my-sm-0" type="button" data-toggle="modal"
-                    data-target="#signupModel">Signup
-            </button>
-        </div>
-    </nav>
-</div>
+        <button class="btn btn-success my-2 my-sm-0" type="button" data-toggle="modal"
+                data-target="#signupModel">Signup
+        </button>
+    </div>
+</nav>
 
 
 <!-- Modal -->
 <div class="modal fade" id="loginModel">
-    <div class="modal-dialog modal-dialog-centered role="document"">
+    <div class="modal-dialog modal-dialog-centered role=" document
+    "">
 
     <!-- Modal content-->
     <div class="modal-content">
@@ -87,7 +88,8 @@ if (isset($_SESSION['login_user'])) {
                 </div>
                 <div class="form-group">
                     <label for="password"><span class="fa fa-eye"></span> Password</label>
-                    <input type="password" class="form-control" id="password" placeholder="Enter password" name="password">
+                    <input type="password" class="form-control" id="password" placeholder="Enter password"
+                           name="password">
                 </div>
                 <div class="checkbox">
                     <label><input type="checkbox" value="" checked>Remember me</label>
@@ -103,7 +105,8 @@ if (isset($_SESSION['login_user'])) {
 
 <!-- Modal -->
 <div class="modal fade" id="signupModel">
-    <div class="modal-dialog modal-dialog-centered role="document"">
+    <div class="modal-dialog modal-dialog-centered role=" document
+    "">
 
     <!-- Modal content-->
     <div class="modal-content">
@@ -123,7 +126,8 @@ if (isset($_SESSION['login_user'])) {
                 </div>
                 <div class="form-group">
                     <label for="password"><span class="fa fa-eye"></span> Password</label>
-                    <input type="password" class="form-control" id="password" placeholder="Enter password" name="password">
+                    <input type="password" class="form-control" id="password" placeholder="Enter password"
+                           name="password">
                 </div>
                 <div class="checkbox">
                     <label><input type="checkbox" value="" checked>Remember me</label>
@@ -134,9 +138,8 @@ if (isset($_SESSION['login_user'])) {
         </div>
 
     </div>
-    </div>
 </div>
-
+</div>
 
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
