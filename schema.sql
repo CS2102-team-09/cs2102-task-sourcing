@@ -2,7 +2,7 @@ CREATE TABLE users (
 	user_id VARCHAR(128) PRIMARY KEY,
 	is_admin BOOL DEFAULT False,
 	password VARCHAR(128) NOT NULL,
-	user_description VARCHAR(256),
+	user_description VARCHAR(256)
 );
 
 CREATE TABLE task_managed_by ( 
