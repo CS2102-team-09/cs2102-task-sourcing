@@ -1,18 +1,18 @@
 -- Users data
-INSERT INTO users (user_id, password) VALUES ('alice', 'cs2102');
-INSERT INTO users (user_id, password) VALUES ('tom', 'cs2102');
-INSERT INTO users (user_id, password) VALUES ('samy', 'cs2102');
-INSERT INTO users (user_id, password) VALUES ('sully', 'cs2102');
-INSERT INTO users (user_id, password) VALUES ('bob', 'cs2102');
-INSERT INTO users (user_id, password) VALUES ('Seng', 'cs2102');
-INSERT INTO users (user_id, password) VALUES ('charlene', 'cs2102');
-INSERT INTO users (user_id, password) VALUES ('sarah', 'cs2102');
-INSERT INTO users (user_id, password) VALUES ('Lee', 'cs2102');
-INSERT INTO users (user_id, password) VALUES ('Nancy', 'cs2102');
-INSERT INTO users (user_id, is_admin, password) VALUES ('Caidi', true, 'cs2102');
-INSERT INTO users (user_id, is_admin, password) VALUES ('Wanqing', true, 'cs2102');
-INSERT INTO users (user_id, is_admin, password) VALUES ('Gerald', true, 'cs2102');
-INSERT INTO users (user_id, is_admin, password) VALUES ('Siang', true, 'cs2102');
+INSERT INTO users (user_id, password) VALUES ('alice', '63be1f98cdf39355c37e5e6196207e7e');
+INSERT INTO users (user_id, password) VALUES ('tom', '63be1f98cdf39355c37e5e6196207e7e');
+INSERT INTO users (user_id, password) VALUES ('samy', '63be1f98cdf39355c37e5e6196207e7e');
+INSERT INTO users (user_id, password) VALUES ('sully', '63be1f98cdf39355c37e5e6196207e7e');
+INSERT INTO users (user_id, password) VALUES ('bob', '63be1f98cdf39355c37e5e6196207e7e');
+INSERT INTO users (user_id, password) VALUES ('Seng', '63be1f98cdf39355c37e5e6196207e7e');
+INSERT INTO users (user_id, password) VALUES ('charlene', '63be1f98cdf39355c37e5e6196207e7e');
+INSERT INTO users (user_id, password) VALUES ('sarah', '63be1f98cdf39355c37e5e6196207e7e');
+INSERT INTO users (user_id, password) VALUES ('Lee', '63be1f98cdf39355c37e5e6196207e7e');
+INSERT INTO users (user_id, password) VALUES ('Nancy', '63be1f98cdf39355c37e5e6196207e7e');
+INSERT INTO users (user_id, is_admin, password) VALUES ('Caidi', true, '63be1f98cdf39355c37e5e6196207e7e');
+INSERT INTO users (user_id, is_admin, password) VALUES ('Wanqing', true, '63be1f98cdf39355c37e5e6196207e7e');
+INSERT INTO users (user_id, is_admin, password) VALUES ('Gerald', true, '63be1f98cdf39355c37e5e6196207e7e');
+INSERT INTO users (user_id, is_admin, password) VALUES ('Siang', true, '63be1f98cdf39355c37e5e6196207e7e');
 
 -- task_managed_by
 INSERT INTO task_managed_by (task_id, task_title, user_id, status, date, start_time, end_time, description)
