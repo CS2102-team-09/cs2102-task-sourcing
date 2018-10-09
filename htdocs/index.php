@@ -1,6 +1,7 @@
 <?php
 include('login.php'); // Includes Login Script
 
+
 if (isset($_SESSION['login_user'])) {
     header("location: profile.php");
 }
@@ -29,6 +30,7 @@ if (isset($_SESSION['login_user'])) {
     </style>
 </head>
 <body>
+<div class="container">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="#">TaskSource</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -60,6 +62,8 @@ if (isset($_SESSION['login_user'])) {
             </button>
         </div>
     </nav>
+</div>
+
 
 <!-- Modal -->
 <div class="modal fade" id="loginModel">
@@ -78,8 +82,8 @@ if (isset($_SESSION['login_user'])) {
             <div class="modal-body" style="padding:30px 40px;">
                 <form action="" method="post" name="submit">
                     <div class="form-group">
-                        <label for="username"><span class="fa fa-user"></span> Username</label>
-                        <input type="text" class="form-control" id="username" placeholder="Enter email" name="username">
+                        <label for="usrname"><span class="fa fa-user"></span> Username</label>
+                        <input type="text" class="form-control" id="usrname" placeholder="Enter email">
                     </div>
                     <div class="form-group">
                         <label for="password"><span class="fa fa-eye"></span> Password</label>
@@ -88,11 +92,14 @@ if (isset($_SESSION['login_user'])) {
                     <div class="checkbox">
                         <label><input type="checkbox" value="" checked>Remember me</label>
                     </div>
-                    <input name="submit" type="submit" class="btn btn-success btn-block" value=" login ">
-                    <span><?php echo $error; ?></span>
+
                 </form>
             </div>
 
+
+            <div class="modal-footer" style="padding:30px 40px;">
+                <button type="submit" class="btn btn-success btn-block"><span class="fa fa-power-off"></span> Login</button>
+            </div>
         </div>
 
     </div>
