@@ -1,0 +1,74 @@
+body { 
+	margin : 0px;
+	padding: 0px;
+	background-color: none;
+	font-family: Calibri, Arial, Tahoma;
+}
+
+/* Style the navigation bar */
+.navbar {
+  width: 100%;
+  background-color: #4682B4;
+  overflow: auto;
+}
+
+/* Navbar links */
+.navbar a {
+  float: left;
+  text-align: center;
+  padding: 12px;
+  color: white;
+  text-decoration: none;
+  /*cursor: pointer;*/
+}
+
+/* Navbar links on mouse-over */
+.navbar a:hover {
+  background-color: #000;
+  margin-right: auto;
+}
+
+/* Current/active navbar link */
+.active {
+  background-color: #4CAF50;
+}
+
+/* Add responsiveness - will automatically display the navbar vertically instead of horizontally on screens less than 500 pixels */
+@media screen and (max-width: 500px) {
+  .navbar a {
+    float: none;
+    display: block;
+  }
+}
+
+input[type=text], input[type=password] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+#login_now { 
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width:100%;
+    background-color: #228B22;
+}
+
+#login_now:hover {
+    opacity: 0.7;
+}
+
+.form { 
+    margin-left:10px;
+    margin-right: 10px;
+    margin-top: 10px;
+}
+
+.form label {
+    margin-bottom: 10px;
+}
