@@ -72,7 +72,7 @@ if (isset($_SESSION['login_user'])) {
     <!-- Modal content-->
     <div class="modal-content">
         <div class="modal-header" style="padding:30px 40px;">
-            <h5>Login</h5>
+            <h5><span class="fa fa-lock"></span> Login</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>

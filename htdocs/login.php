@@ -8,7 +8,7 @@ if (isset($_POST['submit'])) {
 	} else {
 		// Define $username and $password
 		$username=$_POST['username'];
-		$password=$_POST['password'];
+        $password=md5($_POST['password']);
 		// Establishing Connection with Server by passing server_name, user_id and password as a parameter
 		$connection = pg_connect("host=localhost port=5432 dbname=Project1 user=postgres password=postgres");
 		// To protect MySQL injection for Security purpose
@@ -38,7 +38,7 @@ if (isset($_POST['signup'])) {
         echo "<script>console.log( 'creating user');</script>";
         // Define $username and $password
         $username=$_POST['username'];
-        $password=$_POST['password'];
+        $password=md5($_POST['password']);
         // Establishing Connection with Server by passing server_name, user_id and password as a parameter
         $connection = pg_connect("host=localhost port=5432 dbname=Project1 user=postgres password=postgres");
 
