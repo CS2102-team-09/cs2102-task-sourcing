@@ -9,7 +9,7 @@ CREATE TABLE task_managed_by (
 	task_id CHAR(8) NOT NULL UNIQUE,
 	user_id VARCHAR(128),
 	status VARCHAR(64),
-	date DATE NOT NULL,
+	date DATE NOT NULL CHECK (date >= current_date),
 	start_time TIME,
 	end_time TIME,
 	description VARCHAR(128) NOT NULL, 
