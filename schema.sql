@@ -36,3 +36,38 @@ CREATE TABLE task_bid_by (
 	
 	PRIMARY KEY(user_id, task_id)
 );
+
+CREATE OR REPLACE FUNCTION add_bid()
+	RETURNS TRIGGER AS $$
+	BEGIN
+
+	IF ((SELECT COUNT(*) FROM task_bid_by WHERE task_id = NEW.task_id) > 0) THEN
+		UPDATE task_managed_by SET status = 'in_progress' WHERE task_id = NEW.task_id;
+	END IF;
+
+	RETURN NEW;
+	END; $$ LANGUAGE PLPGSQL;
+
+CREATE TRIGGER add_bid_status
+	AFTER UPDATE OR INSERT
+	ON task_bid_by
+	FOR EACH ROW
+	EXECUTE PROCEDURE add_bid();
+
+CREATE OR REPLACE FUNCTION remove_bid()
+	RETURNS TRIGGER AS $$
+	BEGIN
+	IF ((SELECT COUNT(*) FROM task_bid_by WHERE task_id = OLD.task_id) = 1) THEN
+		UPDATE task_managed_by SET status = 'no_bids' WHERE task_id = OLD.task_id;
+	END IF;
+	RETURN OLD;
+	END;
+	$$ LANGUAGE PLPGSQL;
+
+CREATE TRIGGER remove_bid_status
+	BEFORE DELETE
+	ON task_bid_by
+	FOR EACH ROW
+	EXECUTE PROCEDURE remove_bid();
+
+
