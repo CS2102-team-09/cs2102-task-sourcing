@@ -1,7 +1,8 @@
 CREATE TABLE users ( 
 	user_id VARCHAR(128) PRIMARY KEY,
 	is_admin BOOL DEFAULT False,
-	password VARCHAR(128) NOT NULL
+	password VARCHAR(128) NOT NULL,
+	user_description VARCHAR(256),
 );
 
 CREATE TABLE task_managed_by ( 
@@ -23,6 +24,7 @@ CREATE TABLE task_bid_by (
 	task_id CHAR(8),
 	user_id VARCHAR(128),
 	amount NUMERIC,
+	comments_by_bidder VARCHAR(256),
 	
 	FOREIGN KEY (user_id) REFERENCES users(user_id)
 		ON DELETE CASCADE ON UPDATE CASCADE,
