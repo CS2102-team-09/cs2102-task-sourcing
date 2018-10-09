@@ -1,6 +1,6 @@
 <?php
 // Establishing Connection with Server by passing server_name, user_id and password as a parameter
-$connection = pg_connect("host=localhost port=5432 dbname=Project1 user=postgres password=cs2102team09");
+$connection = pg_connect("host=localhost port=5432 dbname=Project1 user=postgres password=postgres");
 
 session_start();// Starting Session
 // Storing Session
