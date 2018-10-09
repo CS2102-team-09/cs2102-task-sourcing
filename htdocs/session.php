@@ -10,7 +10,7 @@ $ses_sql=pg_query($connection, "SELECT * from users where user_id='$user_check'"
 $row = pg_fetch_assoc($ses_sql);
 $login_session =$row['user_id'];
 if(!isset($login_session)){
-pg_close($connection); // Closing Connection
-header('Location: index.php'); // Redirecting To Home Page
-}
+	pg_close($connection); // Closing Connection
+	header('Location: index.php'); // Redirecting To Home Page
+	}
 ?>
