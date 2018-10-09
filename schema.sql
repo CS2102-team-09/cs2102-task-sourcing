@@ -1,3 +1,5 @@
+CREATE SEQUENCE serial_sequence START 101; -- for task_id
+
 CREATE TABLE users ( 
 	user_id VARCHAR(128) PRIMARY KEY,
 	is_admin BOOL DEFAULT False,
@@ -6,7 +8,7 @@ CREATE TABLE users (
 );
 
 CREATE TABLE task_managed_by ( 
-	task_id CHAR(8) NOT NULL UNIQUE,
+	task_id CHAR(8) NOT NULL UNIQUE DEFAULT nextval(('"serial_sequence"'::text)::regclass),
 	task_title VARCHAR(64) NOT NULL,
 	user_id VARCHAR(128),
 	status VARCHAR(64) 	
