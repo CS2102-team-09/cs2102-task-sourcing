@@ -1,74 +1,72 @@
-body { 
-	margin : 0px;
-	padding: 0px;
-	background-color: none;
-	font-family: Calibri, Arial, Tahoma;
+@import http://fonts.googleapis.com/css?family=Raleway;
+/*----------------------------------------------
+CSS Settings For HTML Div ExactCenter
+------------------------------------------------*/
+#main {
+width:960px;
+margin:50px auto;
+font-family:raleway
 }
-
-/* Style the navigation bar */
-.navbar {
-  width: 100%;
-  background-color: #4682B4;
-  overflow: auto;
+span {
+color:red
 }
-
-/* Navbar links */
-.navbar a {
-  float: left;
-  text-align: center;
-  padding: 12px;
-  color: white;
-  text-decoration: none;
-  /*cursor: pointer;*/
+h2 {
+background-color:#FEFFED;
+text-align:center;
+border-radius:10px 10px 0 0;
+margin:-10px -40px;
+padding:15px
 }
-
-/* Navbar links on mouse-over */
-.navbar a:hover {
-  background-color: #000;
-  margin-right: auto;
+hr {
+border:0;
+border-bottom:1px solid #ccc;
+margin:10px -40px;
+margin-bottom:30px
 }
-
-/* Current/active navbar link */
-.active {
-  background-color: #4CAF50;
+#login {
+width:300px;
+float:left;
+border-radius:10px;
+font-family:raleway;
+border:2px solid #ccc;
+padding:10px 40px 25px;
+margin-top:70px
 }
-
-/* Add responsiveness - will automatically display the navbar vertically instead of horizontally on screens less than 500 pixels */
-@media screen and (max-width: 500px) {
-  .navbar a {
-    float: none;
-    display: block;
-  }
+input[type=text],input[type=password] {
+width:99.5%;
+padding:10px;
+margin-top:8px;
+border:1px solid #ccc;
+padding-left:5px;
+font-size:16px;
+font-family:raleway
 }
-
-input[type=text], input[type=password] {
-    width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
+input[type=submit] {
+width:100%;
+background-color:#FFBC00;
+color:#fff;
+border:2px solid #FFCB00;
+padding:10px;
+font-size:20px;
+cursor:pointer;
+border-radius:5px;
+margin-bottom:15px
 }
-
-#login_now { 
-    padding: 14px 20px;
-    margin: 8px 0;
-    border: none;
-    cursor: pointer;
-    width:100%;
-    background-color: #228B22;
+#profile {
+padding:50px;
+border:1px dashed grey;
+font-size:20px;
+background-color:#DCE6F7
 }
-
-#login_now:hover {
-    opacity: 0.7;
+#logout {
+float:right;
+padding:5px;
+border:dashed 1px gray
 }
-
-.form { 
-    margin-left:10px;
-    margin-right: 10px;
-    margin-top: 10px;
+a {
+text-decoration:none;
+color:#6495ed
 }
-
-.form label {
-    margin-bottom: 10px;
+i {
+color:#6495ed
 }
