@@ -92,13 +92,8 @@ if (isset($_SESSION['login_user'])) {
                     <div class="checkbox">
                         <label><input type="checkbox" value="" checked>Remember me</label>
                     </div>
-
+                    <button type="submit" class="btn btn-success btn-block"><span class="fa fa-power-off"></span> Login</button>
                 </form>
-            </div>
-
-
-            <div class="modal-footer" style="padding:30px 40px;">
-                <button type="submit" class="btn btn-success btn-block"><span class="fa fa-power-off"></span> Login</button>
             </div>
         </div>
 
