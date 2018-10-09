@@ -14,7 +14,7 @@ INSERT INTO users (user_id, is_admin, password) VALUES ('Wanqing', true, 'cs2102
 INSERT INTO users (user_id, is_admin, password) VALUES ('Gerald', true, 'cs2102');
 INSERT INTO users (user_id, is_admin, password) VALUES ('Siang', true, 'cs2102');
 
--- Task_managed_by
+-- task_managed_by
 INSERT INTO task_managed_by (task_id, user_id, status, date, start_time, end_time, description)
 	VALUES ('00000001', 'alice', 'bidding', '2018-12-30', '18:00', '20:00', 'War Wash Services');
 INSERT INTO task_managed_by (task_id, user_id, status, date, start_time, end_time, description)
@@ -127,6 +127,33 @@ INSERT INTO task_managed_by (task_id, user_id, status, date, start_time, end_tim
 	VALUES ('00000055', 'charlene', 'bidding', '2018-12-26', '09:30', '12:00', 'Pet Surgery');
 
 
-
-
+-- task_bid_by
+INSERT INTO task_bid_by VALUES ('00000012', 'charlene', 13);
+INSERT INTO task_bid_by VALUES ('00000024', 'charlene', 20);
+INSERT INTO task_bid_by VALUES ('00000011', 'sully', 15);
+INSERT INTO task_bid_by VALUES ('00000011', 'tom', 150);
+INSERT INTO task_bid_by VALUES ('00000001', 'Lee', 20);
+INSERT INTO task_bid_by VALUES ('00000052', 'sully', 150);
+INSERT INTO task_bid_by VALUES ('00000052', 'Nancy', 151);
+INSERT INTO task_bid_by VALUES ('00000055', 'bob', 1500);
+INSERT INTO task_bid_by VALUES ('00000037', 'sully', 0);
+INSERT INTO task_bid_by VALUES ('00000049', 'Nancy', 6);
+INSERT INTO task_bid_by VALUES ('00000041', 'Lee', 5);
+INSERT INTO task_bid_by VALUES ('00000015', 'Nancy', 200);
+INSERT INTO task_bid_by VALUES ('00000015', 'charlene', 210);
+INSERT INTO task_bid_by VALUES ('00000015', 'sarah', 150);
+INSERT INTO task_bid_by VALUES ('00000018', 'sarah', 80);
+INSERT INTO task_bid_by VALUES ('00000008', 'Nancy', 50);
+INSERT INTO task_bid_by VALUES ('00000051', 'charlene', 2000);
+INSERT INTO task_bid_by VALUES ('00000021', 'charlene', 130);
+INSERT INTO task_bid_by VALUES ('00000021', 'sully', 130);
+INSERT INTO task_bid_by VALUES ('00000027', 'sully', 15);
+INSERT INTO task_bid_by VALUES ('00000034', 'sully', 15);
+INSERT INTO task_bid_by VALUES ('00000050', 'charlene', 15);
+INSERT INTO task_bid_by VALUES ('00000028', 'tom', 50);
+INSERT INTO task_bid_by VALUES ('00000039', 'tom', 35);
+INSERT INTO task_bid_by VALUES ('00000045', 'charlene', 75);
+INSERT INTO task_bid_by VALUES ('00000046', 'sully', 150);
+INSERT INTO task_bid_by VALUES ('00000030', 'tom', 178);
+INSERT INTO task_bid_by VALUES ('00000047', 'charlene', 15);
 
