@@ -11,7 +11,7 @@ CREATE TABLE task_managed_by (
 	task_id CHAR(8) NOT NULL UNIQUE DEFAULT nextval(('"serial_sequence"'::text)::regclass),
 	task_title VARCHAR(64) NOT NULL,
 	user_id VARCHAR(128),
-	status VARCHAR(64) 	
+	status VARCHAR(64) DEFAULT 'no_bids'
 		CHECK (status IN ('no_bids', 'in_progress', 'completed')),
 	date DATE NOT NULL 
 		CHECK (date >= current_date),
