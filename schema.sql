@@ -7,11 +7,11 @@ CREATE TABLE users (
 CREATE TABLE task_managed_by ( 
 	task_id CHAR(8) NOT NULL UNIQUE,
 	user_id VARCHAR(128),
-	status VARCHAR(32),
+	status VARCHAR(64),
 	date DATE NOT NULL,
-	start_time NUMERIC,
-	end_time NUMERIC,
-	description VARCHAR(64) NOT NULL, 
+	start_time TIME,
+	end_time TIME,
+	description VARCHAR(128) NOT NULL, 
 	
 	FOREIGN KEY(user_id) REFERENCES users(user_id)
 		ON UPDATE CASCADE ON DELETE CASCADE,
