@@ -69,35 +69,36 @@ if (isset($_SESSION['login_user'])) {
 <div class="modal fade" id="loginModel">
     <div class="modal-dialog modal-dialog-centered role="document"">
 
-        <!-- Modal content-->
-        <div class="modal-content">
-            <div class="modal-header" style="padding:30px 40px;">
-                <h5><span class="fa fa-lock"></span> Login</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
+    <!-- Modal content-->
+    <div class="modal-content">
+        <div class="modal-header" style="padding:30px 40px;">
+            <h5>Login</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
 
 
-            <div class="modal-body" style="padding:30px 40px;">
-                <form action="" method="post" name="submit">
-                    <div class="form-group">
-                        <label for="usrname"><span class="fa fa-user"></span> Username</label>
-                        <input type="text" class="form-control" id="usrname" placeholder="Enter email">
-                    </div>
-                    <div class="form-group">
-                        <label for="password"><span class="fa fa-eye"></span> Password</label>
-                        <input type="password" class="form-control" id="password" placeholder="Enter password" name="password">
-                    </div>
-                    <div class="checkbox">
-                        <label><input type="checkbox" value="" checked>Remember me</label>
-                    </div>
-                    <button type="submit" class="btn btn-success btn-block"><span class="fa fa-power-off"></span> Login</button>
-                </form>
-            </div>
+        <div class="modal-body" style="padding:30px 40px;">
+            <form action="" method="post" name="submit">
+                <div class="form-group">
+                    <label for="username"><span class="fa fa-user"></span> Username</label>
+                    <input type="text" class="form-control" id="username" placeholder="Enter email" name="username">
+                </div>
+                <div class="form-group">
+                    <label for="password"><span class="fa fa-eye"></span> Password</label>
+                    <input type="password" class="form-control" id="password" placeholder="Enter password" name="password">
+                </div>
+                <div class="checkbox">
+                    <label><input type="checkbox" value="" checked>Remember me</label>
+                </div>
+                <input name="submit" type="submit" class="btn btn-success btn-block" value="Login">
+                <span><?php echo $error; ?></span>
+            </form>
         </div>
 
     </div>
+</div>
 </div>
 
 <!-- Modal -->
@@ -133,8 +134,7 @@ if (isset($_SESSION['login_user'])) {
         </div>
 
     </div>
-
-</div>
+    </div>
 </div>
 
 
