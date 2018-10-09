@@ -1,6 +1,9 @@
 <?php
 session_start(); // Starting Session
 $error=''; // Variable To Store Error Message
+
+echo "<script>console.log( $_POST);</script>";
+
 if (isset($_POST['submit'])) {
 	if (empty($_POST['username']) || empty($_POST['password'])) {
 		$error = "Username or Password is invalid";
@@ -9,7 +12,7 @@ if (isset($_POST['submit'])) {
 		$username=$_POST['username'];
 		$password=$_POST['password'];
 		// Establishing Connection with Server by passing server_name, user_id and password as a parameter
-		$connection = pg_connect("host=localhost port=5432 dbname=Project1 user=postgres password=cs2102team09");
+		$connection = pg_connect("host=localhost port=5432 dbname=Project1 user=postgres password=postgres");
 		// To protect MySQL injection for Security purpose
 		// $username = stripslashes($username);
 		// $password = stripslashes($password);
@@ -28,5 +31,28 @@ if (isset($_POST['submit'])) {
 		}
 		pg_close($connection); // Closing Connection
 	}
+}
+
+if (isset($_POST['signup'])) {
+    if (empty($_POST['username']) || empty($_POST['password'])) {
+        $error = "Username or Password is invalid";
+    } else {
+        echo "<script>console.log( 'creating user');</script>";
+        // Define $username and $password
+        $username=$_POST['username'];
+        $password=$_POST['password'];
+        // Establishing Connection with Server by passing server_name, user_id and password as a parameter
+        $connection = pg_connect("host=localhost port=5432 dbname=Project1 user=postgres password=postgres");
+
+
+        $result = pg_query($connection, "INSERT INTO users (user_id, password) VALUES ('$username', '$password')");
+        if (!$result) {
+            echo '<script type="text/javascript">alert("Signup Failed")</script>';
+        } else {
+            echo '<script type="text/javascript">alert("Signup successful, please login")</script>';
+        }
+
+        pg_close($connection); // Closing Connection
+    }
 }
 ?>
