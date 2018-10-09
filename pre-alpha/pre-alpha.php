@@ -41,27 +41,7 @@
 // Connect to the database. Please change the password in the following line accordingly
     $db = pg_connect("host=localhost port=5432 dbname=Project1 user=postgres password=postgres");
     if (isset($_POST['insert'])) {
-        echo "
-        <div class=\"container\" style=\"margin-top: 20px\">
-        <form name=\"display\" action=\"index.php\" method=\"POST\">
-        <div class=\"form-group\">
-        <label for=\"new_bookid\">Book ID:</label>
-        <input type=\"text\" class=\"form-control\" id=\"new_bookid\" name=\"new_bookid\" value='$row[book_id]' required>
-        </div>
-        <div class=\"form-group\">
-        <label for=\"new_book_name\">Book Name:</label>
-        <input type=\"text\" class=\"form-control\" id=\"new_book_name\" name=\"new_book_name\" value='$row[name]' required>
-        </div>
-        <div class=\"form-group\">
-        <label for=\"new_price\">Price (USD):</label>
-        <input type=\"text\" class=\"form-control\" id=\"new_price\" name=\"new_price\" value='$row[price]' required>
-        </div>
-        <div class=\"form-group\">
-        <label for=\"new_dop\">Date of publication:</label>
-        <input type=\"text\" class=\"form-control\" id=\"new_dop\" name=\"new_dop\" value='$row[date_of_publication]' required>
-        </div>
-        
-        <button type=\"submit\" name=\"add\" class=\"btn btn-primary\">Insert to DB</button>
+        echo ">Insert to DB</button>
         </form>
         </div>
         ";
@@ -80,31 +60,7 @@ if (isset($_POST['searchById'])) {
     if (!$row) {
         echo "<div class=\"container\" style=\"margin-top: 20px\"><span class=\"h5 text-danger\">Book not found!</span></div>";
     } else {
-        echo "
-        <div class=\"container\" style=\"margin-top: 20px\">
-        <form name=\"display\" action=\"index.php\" method=\"POST\">
-        <div class=\"form-group\">
-        <label for=\"bookid_updated\">Book ID:</label>
-        <input type=\"text\" class=\"form-control\" id=\"bookid_updated\" name=\"bookid_updated\" value='$row[book_id]' readonly>
-        </div>
-        <div class=\"form-group\">
-        <label for=\"bookid_updated\">Book Name:</label>
-        <input type=\"text\" class=\"form-control\" id=\"book_name_updated\" name=\"book_name_updated\" value='$row[name]' required>
-        </div>
-        <div class=\"form-group\">
-        <label for=\"bookid_updated\">Price (USD):</label>
-        <input type=\"text\" class=\"form-control\" id=\"price_updated\" name=\"price_updated\" value='$row[price]' required>
-        </div>
-        <div class=\"form-group\">
-        <label for=\"bookid_updated\">Date of publication:</label>
-        <input type=\"text\" class=\"form-control\" id=\"dop_updated\" name=\"dop_updated\" value='$row[date_of_publication]' required>
-        </div>                    
-        <div class=\"form-row align-items-left\">
-        <div class=\"col-auto\">
-        <button type=\"submit\" name=\"new\" class=\"btn btn-primary\">Update</button>
-        </div>
-        <div class=\"col-auto\">
-        <button type=\"submit\" name=\"delete\" class=\"btn btn-danger\">Delete</button>
+        echo ">Delete</button>
         </div>
         </div>                    
         
