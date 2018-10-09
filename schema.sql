@@ -12,7 +12,9 @@ CREATE TABLE task_managed_by (
 	task_title VARCHAR(64) NOT NULL,
 	user_id VARCHAR(128),
 	status VARCHAR(64) DEFAULT 'no_bids'
-		CHECK (status IN ('no_bids', 'in_progress', 'completed')),
+		CHECK (status IN ('no_bids', 'in_progress', 'completed', 'not_successful')),
+	winning_bid NUMERIC,
+	winner VARCHAR(128),
 	date DATE NOT NULL 
 		CHECK (date >= current_date),
 	start_time TIME,
@@ -20,6 +22,8 @@ CREATE TABLE task_managed_by (
 	description VARCHAR(128), 
 	
 	FOREIGN KEY(user_id) REFERENCES users(user_id)
+		ON UPDATE CASCADE ON DELETE CASCADE,
+	FOREIGN KEY (winner) REFERENCES users(user_id)
 		ON UPDATE CASCADE ON DELETE CASCADE,
 	
 	PRIMARY KEY(task_id, user_id)
