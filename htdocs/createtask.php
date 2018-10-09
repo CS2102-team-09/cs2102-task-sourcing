@@ -8,25 +8,21 @@ if (isset($_POST['submit'])) {
 		$title = $_POST['title'];
 		$description = $_POST['description'];
 		$date = $_POST['date'];
-		$start_time = $_POST['start_time'] . ':00';
-		$end_time = $_POST['end_time'] . ':00';
+		$start_time = $_POST['start_time'];
+		$end_time = $_POST['end_time'];
 
 		$user_id = $_SESSION['login_user'];
 
+        echo "<script>console.log( 'Debug Objects: " . $date . "' );</script>";
+        echo "<script>console.log( 'Debug Objects: " . $start_time . "' );</script>";
+        echo "<script>console.log( 'Debug Objects: " . $end_time . "' );</script>";
 
 		// Establishing Connection with Server by passing server_name, user_id and password as a parameter
 		$connection = pg_connect("host=localhost port=5432 dbname=Project1 user=postgres password=postgres");
-		// To protect MySQL injection for Security purpose
-		// $username = stripslashes($username);
-		// $password = stripslashes($password);
-		// $username = pg_escape_string($connection, $username);
-		// $password = pg_escape_string($connection, $password);
-		// Selecting Database
+
 		
 		// SQL query to fetch information of registerd users and finds user match.
-		$query = pg_query($connection, "INSERT INTO task_managed_by VALUES('10000009', 
-										'$user_id', 'no_bids', '$date', '$start_time', 
-										'$end_time', '$description')");
+		$query = pg_query($connection, "INSERT INTO INSERT INTO task_managed_by (task_title, user_id, date) VALUES ('$title', '$user_id', '$date')");
 		if ($query) {
 			echo "Added successfully!";
 			header("location: profile.php"); // Redirecting To Other Page
