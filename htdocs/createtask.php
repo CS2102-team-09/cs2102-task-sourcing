@@ -56,20 +56,21 @@ if (isset($_POST['submit'])) {
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" href="profile.php">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="profile.php"> Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Bid a Task <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="bids.php"> Display Bids <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link active" href="createtask.php">Create a Task <span class="sr-only">(current)</span></a>
+                <a class="nav-link active" href="createtask.php"> Create a Task <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="tasks.php">Manage Tasks <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="tasks.php"> Manage Tasks <span class="sr-only">(current)</span></a>
             </li>
         </ul>
 
         <a class="btn btn-outline-success my-2 my-sm-0" href="logout.php">Logout</a>
+
     </div>
 </nav>
 
