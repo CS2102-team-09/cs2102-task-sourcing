@@ -74,31 +74,37 @@ if (isset($_POST['submit'])) {
     </div>
 </nav>
 
-
-<form id="createtaskform" action="" method="post">
-    <label>Title</label>
-    <input id="task_title" name="title" placeholder="Write your task title here" type="text">
-
-    <label>Description</label>
-    <br>
-    <textarea id="task_description" rows="4" cols="50" name="description" form="createtaskform">Write details of your task here</textarea>
-    <br>
-
-    <label>Date of task</label>
-    <input id="task_date" name="date" type="date">
-
-    <label>Start time</label>
-    <input id="task_starttime" name="start_time" type="time">
-
-    <label>End time</label>
-    <input id="task_endtime" name="end_time" type="time">
-
-    <br>
-    <span><?php echo $error; ?></span>
-    <br>
-
-    <input name="submit" type="submit" value=" Submit task ">
+<div class="container" style="margin-top: 30px">
+<form action="" method="post">
+    <div class="form-group">
+        <label for="exampleFormControlInput1">Task Title</label>
+        <input name="title" type="text" class="form-control" id="exampleFormControlInput1" required>
+    </div>
+    <div class="form-group">
+        <label for="exampleFormControlTextarea1">Task Description</label>
+        <textarea name="description" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+    </div>
+    <div class="form-group row">
+        <label for="example-date-input" class="col-2 col-form-label">Date</label>
+        <div class="col-10">
+            <input name="date" class="form-control" type="date" value="2018-10-19" id="example-date-input">
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="example-time-input" class="col-2 col-form-label">Start Time</label>
+        <div class="col-10">
+            <input name="start_time" class="form-control" type="time" value="13:45:00" id="example-time-input">
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="example-time-input" class="col-2 col-form-label">End Time</label>
+        <div class="col-10">
+            <input name="end_time" class="form-control" type="time" value="13:45:00" id="example-time-input">
+        </div>
+    </div>
+    <div class="form-group"><input name="submit" class="btn btn-success" type="submit" value=" Submit task "></div>
 </form>
+</div>
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
