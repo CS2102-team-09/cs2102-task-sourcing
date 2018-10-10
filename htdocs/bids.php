@@ -32,13 +32,13 @@ if (!$query) {
                 <a class="nav-link" href="profile.php"> Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link active" href="bids.php"> Display Bids <span class="sr-only">(current)</span></a>
+                <a class="nav-link active" href="bids.php"> My Bids <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="createtask.php"> Create a Task <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="createtask.php"> Create New <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="tasks.php"> Manage Tasks <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="tasks.php"> All Tasks <span class="sr-only">(current)</span></a>
             </li>
         </ul>
 
@@ -94,7 +94,7 @@ while ($row = pg_fetch_array($query)) {
   <button type=\"button\" class=\"list-group-item list-group-item-action\">End Time: " . $task_endtime . "</button>
   <button type=\"button\" class=\"list-group-item list-group-item-action\">Task Owner: " . $task_owner . "</button>
   <button type=\"button\" class=\"list-group-item list-group-item-action\">Current Bidder: " . $user_id . "</button>
-  <button type=\"button\" class=\"list-group-item list-group-item-action\">Bid Amount: " . $bid_amount . "</button>
+  <button type=\"button\" class=\"list-group-item list-group-item-action\">Bid Amount: $" . $bid_amount . "</button>
 </div>
 </div>
 	        ";

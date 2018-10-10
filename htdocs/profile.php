@@ -27,13 +27,13 @@ include('session.php');
                 <a class="nav-link active" href="profile.php"> Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="bids.php"> Display Bids <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="bids.php"> My Bids <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="createtask.php"> Create a Task <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="createtask.php"> Create New <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="tasks.php"> Manage Tasks <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="tasks.php"> All Tasks <span class="sr-only">(current)</span></a>
             </li>
         </ul>
 
@@ -42,10 +42,11 @@ include('session.php');
     </div>
 </nav>
 
-<div class="container">
-    <h1 class="text-center">
-        Welcome : <?php echo $login_session; ?>
-    </h1>
+
+<div class="container h-100 d-flex justify-content-center" style="margin-top: 100px">
+    <div class="jumbotron my-auto">
+        <h1 class="display-3">Hello, <?php echo $login_session; ?>!</h1>
+    </div>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"

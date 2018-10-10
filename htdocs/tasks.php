@@ -2,7 +2,16 @@
 include('session.php');
 $connection = pg_connect("host=localhost port=5432 dbname=Project1 user=postgres password=postgres");
 
-$query = pg_query($connection, "SELECT * FROM task_managed_by");
+$query = pg_query($connection, "SELECT test.task_id, test_next.owner, test_next.task_title, test_next.description, test_next.status, test_next.date, test_next.start_time, test_next.end_time, test_next.bidder, test_next.amount
+FROM (SELECT test.task_id, MAX(test.amount) AS amount
+FROM(SELECT b.task_id, b.user_id AS owner, b.task_title, b.description, b.status, b.date, b.start_time, b.end_time, t.user_id AS bidder, CASE WHEN t.amount IS NULL THEN 0 ELSE t.amount END
+FROM task_bid_by t RIGHT OUTER JOIN task_managed_by b ON t.task_id = b.task_id
+ORDER BY b.task_id, t.amount DESC) AS test
+GROUP BY test.task_id) AS test, (SELECT b.task_id, b.user_id AS owner, b.task_title, b.description, b.status, b.date, b.start_time, b.end_time, t.user_id AS bidder, CASE WHEN t.amount IS NULL THEN 0 ELSE t.amount END
+FROM task_bid_by t RIGHT OUTER JOIN task_managed_by b ON t.task_id = b.task_id
+ORDER BY b.task_id, t.amount DESC) AS test_next
+WHERE test.amount = test_next.amount
+AND test.task_id = test_next.task_id");
 
 if (!$query) {
     echo "Invalid query provided.";
@@ -48,13 +57,13 @@ if (isset($_POST['submit'])) {
                 <a class="nav-link" href="profile.php"> Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="bids.php"> Display Bids <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="bids.php"> My Bids <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="createtask.php"> Create a Task <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="createtask.php"> Create New <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item active">
-                <a class="nav-link" href="tasks.php"> Manage Tasks <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="tasks.php"> All Tasks <span class="sr-only">(current)</span></a>
             </li>
         </ul>
 
@@ -82,7 +91,7 @@ $i = 0;
 // output data of each row
 while($row = pg_fetch_array($query)) {
     $i++;
-    $task_owner = $row['user_id'];
+    $task_owner = $row['owner'];
     $task_title = $row["task_title"];
     $task_status = $row["status"];
     $task_date = $row["date"];
@@ -90,6 +99,7 @@ while($row = pg_fetch_array($query)) {
     $task_endtime = $row["end_time"];
     $task_description = $row["description"];
     $task_id = $row["task_id"];
+    $amount = $row["amount"];
 
     echo "
 
@@ -104,6 +114,8 @@ while($row = pg_fetch_array($query)) {
     <button type=\"button\" class=\"list-group-item list-group-item-action\">Start Time: " . $task_starttime . "</button>
     <button type=\"button\" class=\"list-group-item list-group-item-action\">End Time: " . $task_endtime . "</button>
     <button type=\"button\" class=\"list-group-item list-group-item-action\">Task Owner: " . $task_owner . "</button>
+    <button type=\"button\" class=\"list-group-item list-group-item-action\">Current Bid: $" . $amount . "</button>
+    
     </div>
         <button id='addbidbutton".$i."' type='button' class='btn btn-success'>Add bid</button>
             <script type='text/javascript'>
