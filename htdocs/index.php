@@ -9,7 +9,7 @@ if (isset($_SESSION['login_user'])) {
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Title</title>
+    <title>ThinkCan Pte Ltd</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -55,7 +55,7 @@ if (isset($_SESSION['login_user'])) {
             </li>
         </ul>
 
-        <button class="btn btn-outline-success my-2 my-sm-0" type="button" data-toggle="modal"
+        <button style="margin-right: 5px" class="btn btn-outline-success my-2 my-sm-0" type="button" data-toggle="modal"
                 data-target="#loginModel">Login
         </button>
         <button class="btn btn-success my-2 my-sm-0" type="button" data-toggle="modal"
@@ -111,7 +111,7 @@ if (isset($_SESSION['login_user'])) {
     <!-- Modal content-->
     <div class="modal-content">
         <div class="modal-header" style="padding:30px 40px;">
-            <h5>Signup</h5>
+            <h5><span class="fa fa-log-in"></span> Signup</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
@@ -132,7 +132,7 @@ if (isset($_SESSION['login_user'])) {
                 <div class="checkbox">
                     <label><input type="checkbox" value="" checked>Remember me</label>
                 </div>
-                <input name="signup" type="submit" class="btn btn-success btn-block" value="signup">
+                <input name="signup" type="submit" class="btn btn-success btn-block" value="Signup">
                 <span><?php echo $error; ?></span>
             </form>
         </div>
