@@ -8,11 +8,11 @@ if (!$query) {
     echo "Invalid query provided.";
 }
 
-$error='no error just yet';
+$error='';
 if (isset($_POST['submit'])) {
     $bid_amount = $_POST['bid'];
     $taskid = $_POST['task_id'];
-    $userid = $_POST['user_id'];
+    $userid = $_SESSION['login_user'];
 
 
     $add_task = pg_query($connection, "INSERT INTO task_bid_by(task_id, user_id, amount) VALUES( 
@@ -50,10 +50,10 @@ if (isset($_POST['submit'])) {
             <li class="nav-item">
                 <a class="nav-link" href="bids.php"> Display Bids <span class="sr-only">(current)</span></a>
             </li>
-            <li class="nav-item active">
+            <li class="nav-item">
                 <a class="nav-link" href="createtask.php"> Create a Task <span class="sr-only">(current)</span></a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item active">
                 <a class="nav-link" href="tasks.php"> Manage Tasks <span class="sr-only">(current)</span></a>
             </li>
         </ul>
@@ -92,46 +92,43 @@ while($row = pg_fetch_array($query)) {
     $task_id = $row["task_id"];
 
     echo "
-	            <div class='accordion' id='accordionexample'>
-  					<div class='card'>
-					    <div class='card-header' id='headingOne".$i."'>
-					      <h5 class='mb-0'>
-					        <button class='btn btn-link' type='button' data-toggle='collapse' data-target='#collapseOne' aria-expanded='true' aria-controls='collapseOne'><h1>".$task_title." </h1><span class='badge badge-secondary'>".$task_status."</span>
-					        </button>
-					      </h5>
-					    </div>
 
-					    <div id='collapseOne".$i."' class='collapse show' aria-labelledby='headingOne' data-parent='#accordionexample'>
-					      <div class='card-body'>
-					      	Date Created: <b>".$task_date."</b><br><br>
-
-					      	<b><h5>".$task_description."</h5></b><br><br>
-					      	Start Time: <b>".$task_starttime."</b><br><br>
-					      	End Time: <b>".$task_endtime."</b><br><br>
-					      	<button id='addbidbutton".$i."' type='button' class='btn btn-success'>Add bid</button>
-								<script type='text/javascript'>
-									$('#addbidbutton".$i."').on('click', function (e) {
-									     var modal = document.getElementById('addbid".$i."');
-									     modal.style.display = 'inline-block';
-									})
-								</script>
-								<div style='display:none' id='addbid".$i."' >
-									<form action='' method='post'>
-								    <div class='container'>
-								      <label for='uname'><b>Bid Amount</b></label>
-								      <input type='text' placeholder='Enter Bid' name='bid' required>
-								      <input type='hidden' id='task_id' name='task_id' value='".$task_id."'>
-								      <input type='hidden' id='user_id' name='user_id' value='".$task_owner."'>
-								      <button name='submit' type='submit'>Submit Bid</button>
-								      <span>".$error."</span>
-								    </div>
-								  </form>
-								</div>
-					      </div>
-					    </div>
-					  </div>
-				</div>
-				<br>
+				
+				
+				
+<div class='container' style='padding-top: 30px'>
+<div class=\"list-group\">
+    <button type=\"button\" class=\"list-group-item list-group-item-action list-group-item-primary\">Task Title: " . $task_title . " <span class='badge badge-danger' style='margin-left: 15px'>" . $task_status . "</span></button>
+    <button type=\"button\" class=\"list-group-item list-group-item-action\">Description: " . $task_description . "</button>
+    <button type=\"button\" class=\"list-group-item list-group-item-action\">Date: " . $task_date . "</button>
+    <button type=\"button\" class=\"list-group-item list-group-item-action\">Start Time: " . $task_starttime . "</button>
+    <button type=\"button\" class=\"list-group-item list-group-item-action\">End Time: " . $task_endtime . "</button>
+    <button type=\"button\" class=\"list-group-item list-group-item-action\">Task Owner: " . $task_owner . "</button>
+    </div>
+        <button id='addbidbutton".$i."' type='button' class='btn btn-success'>Add bid</button>
+            <script type='text/javascript'>
+                $('#addbidbutton".$i."').on('click', function (e) {
+                     var modal = document.getElementById('addbid".$i."');
+                     modal.style.display = 'inline-block';
+                })
+            </script>
+            <div style='display:none' id='addbid".$i."' >
+                <form action='' method='post'>
+                <div class='container'>
+                  <input type='hidden' id='task_id' name='task_id' value='".$task_id."'>
+                  <input type='hidden' id='user_id' name='user_id' value='".$task_owner."'>
+                  <div class='form-group'>
+                  <div class='form-row'>
+                    <input type='text' class='form-control' placeholder='Enter Bid Amount' name='bid' required>
+                    <button class='btn btn-danger' name='submit' type='submit' >Submit Bid</button>
+                  </div>
+                  </div>
+                  <span>".$error."</span>
+                </div>
+              </form>
+            </div>
+      </div>
+    </div>
 	        ";
 }
 

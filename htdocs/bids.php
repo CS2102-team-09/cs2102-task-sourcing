@@ -7,22 +7,6 @@ $query = pg_query($connection, "SELECT * FROM task_bid_by WHERE user_id='$signin
 if (!$query) {
     echo "Invalid query provided.";
 }
-
-$error = 'no error just yet';
-if (isset($_POST['submit'])) {
-    $bid_amount = $_POST['bid'];
-    $taskid = $_POST['task_id'];
-    $userid = $_POST['user_id'];
-
-
-    $add_task = pg_query($connection, "INSERT INTO task_bid_by(task_id, user_id, amount) VALUES( 
-										'$taskid', '$userid', '$bid_amount')");
-    if ($add_task) {
-        header("location: profile.php");
-    } else {
-        $error = 'Invalid query provided, please try again!';
-    }
-}
 ?>
 
 <!DOCTYPE html>
@@ -85,6 +69,7 @@ while ($row = pg_fetch_array($query)) {
 
     $user_id = $row['user_id'];
     $task_id = $row["task_id"];
+    $bid_amount = $row["amount"];
 
 
     $taskQuery = pg_query($connection, "SELECT * FROM task_managed_by WHERE task_id='$task_id'");
@@ -109,6 +94,7 @@ while ($row = pg_fetch_array($query)) {
   <button type=\"button\" class=\"list-group-item list-group-item-action\">End Time: " . $task_endtime . "</button>
   <button type=\"button\" class=\"list-group-item list-group-item-action\">Task Owner: " . $task_owner . "</button>
   <button type=\"button\" class=\"list-group-item list-group-item-action\">Current Bidder: " . $user_id . "</button>
+  <button type=\"button\" class=\"list-group-item list-group-item-action\">Bid Amount: " . $bid_amount . "</button>
 </div>
 </div>
 	        ";
