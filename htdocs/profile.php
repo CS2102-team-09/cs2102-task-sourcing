@@ -37,12 +37,8 @@ include('session.php');
             </li>
         </ul>
 
-        <button class="btn btn-outline-success my-2 my-sm-0" type="button" data-toggle="modal"
-                data-target="#loginModel">Login
-        </button>
-        <button class="btn btn-success my-2 my-sm-0" type="button" data-toggle="modal"
-                data-target="#signupModel">Signup
-        </button>
+        <a class="btn btn-outline-success my-2 my-sm-0" href="logout.php">Logout</a>
+
     </div>
 </nav>
 
