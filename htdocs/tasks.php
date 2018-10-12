@@ -27,13 +27,47 @@ if ($_POST['submit'] == 'Bid') {
 		}
 	}
 } else if ($_POST['submit'] == 'Update') {
-	//TO DO
-    $bid_amount = $_POST['bid'];
-	$taskid = $_POST['task_id'];
-	$userid = $_SESSION['login_user'];
+	if (empty($_POST['title']) || empty($_POST['description'])) {
+		$error = "Please fill in all the fields!";
+
+		echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+			  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			  </button>
+			  '.$error.'
+			</div>';
+	} else {
+		//TO DO
+		$taskid = $_POST['task_id'];
+		$title = $_POST['title'];
+		$description = $_POST['description'];
+		$date = $_POST['date'];
+		$starttime = $_POST['start_time'];
+		$endtime = $_POST['end_time'];
+
+		$update_task = pg_query($connection, "UPDATE task_managed_by SET task_title='$title', description='$description', date='$date', start_time='$starttime', end_time='$endtime'
+												WHERE task_id='$taskid' ");
+
+		if ($update_task) {
+			echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+			  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			  </button>
+			  Update successful! Refreshing...
+			</div>';
+			header("Refresh:1");
+		} else {	
+			$error = 'Invalid query provided, please try again!';
+
+			echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+			  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			  </button>
+			  '.$error.'
+			</div>';
+		}
+	}
 } 
-
-
 ?>
 
 <!DOCTYPE html>
@@ -130,7 +164,7 @@ while($row = pg_fetch_array($query)) {
 						<input type='hidden' id='user_id' name='user_id' value='".$task_owner."'>
 						<div class='form-group'>
 							<div class='form-row'>
-							<input type='text' class='form-control' placeholder='Enter Bid Amount' name='bid' required>
+							<input style=\"font-family: inherit\" type='text' class='form-control' placeholder='Enter Bid Amount' name='bid' required>
 							<div style='margin-top:5px;' class=\"input-group input-group-sm mb-3\">
 							<input class='col-3 form-control btn btn-primary' aria-label='Small' aria-describedby='inputGroup-sizing-sm' type='submit' name='submit' value='Bid' />
 							</div>
@@ -146,68 +180,66 @@ while($row = pg_fetch_array($query)) {
 	//TODO: when login_user is the task owner, can only edit task
 	else {
 		echo "
-		<button id='editbutton".$i."' type='button' class='btn btn-primary'>Edit</button>
-			<script type='text/javascript'>
-				$('#editbutton".$i."').on('click', function (e) {
-						var modal = document.getElementById('edit".$i."');
-						modal.style.display = 'block';
-				})
-			</script>
-			<div style='display:none' id='edit".$i."' >
-			
-				<div class=\"container\">
-					 <div class=\"row\">
-						<div class=\"col-1\"></div>
-						<div class=\"col-4\">
-						<form action='' method='post'>
-							<div class=\"form-group row\">
-								<label for=\"example-text-input\" class=\"col-4 col-form-label\">Title</label>
-								<div class=\"col-8\">
-								<input class=\"form-control form-control-sm\" type=\"text\" value=" . $task_title . " id=\"example-text-input\">
-								</div>
-							</div>
-
-							<div class=\"form-group row\">
-								<label for=\"example-text-input\" class=\"col-4 col-form-label\">Description</label>
-								<div class=\"col-8\">
-								<textarea id=\"form_message\" name=\"message\" class=\"form-control\" rows=\"4\" value=" . $task_description . "></textarea>
-								</div>
-							</div>
-						
+		<p><button id='editbutton".$i."' class=\"btn btn-success\" type=\"button\" data-toggle=\"collapse\" data-target=\"#collapseExample\" aria-expanded=\"false\" aria-controls=\"collapseExample\">
+		Edit
+		</button></p>
+		
+		<div class=\"collapse\" id=\"collapseExample\">
+		  <div class=\"card card-body\">
+			<div class=\"row\">
+				<div class=\"col-1\"></div>
+				<div class=\"col-4\">
+				<form action='' method='post'>
+					<input type='hidden' id='task_id' name='task_id' value='".$task_id."'>
+					<div class=\"form-group row\">
+						<label for=\"example-text-input\" class=\"col-4 col-form-label\">Title</label>
+						<div class=\"col-8\">
+						<input style=\"font-family: inherit; margin-top: 0; padding: .375rem .75rem\" name=\"title\" class=\"form-control\" type=\"text\" value='" . $task_title . "' id=\"example-text-input\">
 						</div>
-						<div class=\"col-4\">
-						
-							<div class=\"form-group row\">
-								<label for=\"example-date-input\" class=\"col-4 col-form-label\">Date</label>
-								<div class=\"col-8\">
-								<input class=\"form-control form-control-sm\" type=\"date\" value=" . $task_date . " id=\"example-date-input\">
-								</div>
-							</div>
+					</div>
 
-							<div class=\"form-group row\">
-								<label for=\"example-time-input\" class=\"col-4 col-form-label\">Start Time</label>
-								<div class=\"col-8\">
-								<input class=\"form-control form-control-sm\" type=\"time\" value=" . $task_starttime . " id=\"example-time-input\">
-								</div>
-							</div>
-
-							<div class=\"form-group row\">
-								<label for=\"example-time-input\" class=\"col-4 col-form-label\">End Time</label>
-								<div class=\"col-8\">
-								<input class=\"form-control form-control-sm\" type=\"time\" value=" . $task_endtime . " id=\"example-time-input\">
-								</div>
-							</div>
-							
-						<div class=\"input-group input-group-sm mb-3\">
-						<input class='col-3 form-control btn btn-primary' aria-label='Small' aria-describedby='inputGroup-sizing-sm' type='submit' name='submit' value='Update' />
+					<div class=\"form-group row\">
+						<label for=\"example-text-input\" class=\"col-4 col-form-label\">Description</label>
+						<div class=\"col-8\">
+						<textarea id=\"form_message\" name=\"description\" class=\"form-control\" rows=\"4\">". $task_description ."</textarea>
 						</div>
-
-						</form>
-						</div>
+					</div>
 						
-					  </div>
 				</div>
+				<div class=\"col-4\">
+						
+					<div class=\"form-group row\">
+						<label for=\"example-date-input\" class=\"col-4 col-form-label\">Date</label>
+						<div class=\"col-8\">
+						<input class=\"form-control\" name=\"date\" type=\"date\" value=" . $task_date . " id=\"example-date-input\">
+						</div>
+					</div>
+
+					<div class=\"form-group row\">
+						<label for=\"example-time-input\" class=\"col-4 col-form-label\">Start Time</label>
+						<div class=\"col-8\">
+						<input class=\"form-control\" name=\"start_time\" type=\"time\" value=" . $task_starttime . " id=\"example-time-input\">
+						</div>
+					</div>
+
+					<div class=\"form-group row\">
+						<label for=\"example-time-input\" class=\"col-4 col-form-label\">End Time</label>
+						<div class=\"col-8\">
+						<input class=\"form-control\" name=\"end_time\" type=\"time\" value=" . $task_endtime . " id=\"example-time-input\">
+						</div>
+					</div>
+					
+					<div class=\"input-group input-group-sm mb-3\">
+					<input class='col-3 form-control btn btn-primary' aria-label='Small' aria-describedby='inputGroup-sizing-sm' type='submit' name='submit' value='Update' />
+					</div>
+
+				</form>
+				</div>
+
 			</div>
+			</div>
+			
+		</div>
 		";
 	}
 
