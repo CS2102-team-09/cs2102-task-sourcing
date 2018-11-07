@@ -1,7 +1,7 @@
 <?php
 include('login.php'); // Includes Login Script
-include('./components/index_header.html');
 
+include('./components/index_header.html');
 
 if (isset($_SESSION['login_user'])) {
     header("location: profile.php");
