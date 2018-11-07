@@ -83,6 +83,7 @@ if (isset($_POST['submit'])) {
 </script>
 <?php
 $i = 0;
+$login_user = $_SESSION['login_user'];
 // output data of each row
 while($row = pg_fetch_array($query)) {
     $i++;
@@ -95,12 +96,14 @@ while($row = pg_fetch_array($query)) {
     $task_description = $row["description"];
     $task_id = $row["task_id"];
     $amount = $row["amount"];
-	
+
+	// temp method. need to rewrite query
+	if ($login_user!=$task_owner) {
     echo "
 				
 				
 				
-<div class='container' style='padding: 30px 0'>
+<div class='container' style='padding-top: 30px'>
 <div class=\"list-group\">
     <button type=\"button\" class=\"list-group-item list-group-item-action list-group-item-primary\">Task Title: " . $task_title . " <span class='badge badge-danger' style='margin-left: 15px'>" . $task_status . "</span></button>
     <button type=\"button\" class=\"list-group-item list-group-item-action\">Description: " . $task_description . "</button>
@@ -110,12 +113,7 @@ while($row = pg_fetch_array($query)) {
     <button type=\"button\" class=\"list-group-item list-group-item-action\">Task Owner: " . $task_owner . "</button>
     <button type=\"button\" class=\"list-group-item list-group-item-action\">Current Bid: $" . $amount . "</button>
     
-    </div>";
-
-
-	// can bid for task if login_user did not create the task
-	if ($task_owner != $login_user) {
-		echo "
+    </div>
         <button id='addbidbutton".$i."' type='button' class='btn btn-success'>Add bid</button>
             <script type='text/javascript'>
                 $('#addbidbutton".$i."').on('click', function (e) {
@@ -138,38 +136,10 @@ while($row = pg_fetch_array($query)) {
                 </div>
               </form>
             </div>
-      </div>";
+      </div>
+    </div>
+	        ";
 	}
-	
-	else {
-		echo "
-        <button id='addbidbutton".$i."' type='button' class='btn btn-success'>Edit</button>
-            <script type='text/javascript'>
-                $('#addbidbutton".$i."').on('click', function (e) {
-                     var modal = document.getElementById('addbid".$i."');
-                     modal.style.display = 'inline-block';
-                })
-            </script>
-            <div style='display:none' id='addbid".$i."' >
-                <form action='' method='post'>
-                <div class='container'>
-                  <input type='hidden' id='task_id' name='task_id' value='".$task_id."'>
-                  <input type='hidden' id='user_id' name='user_id' value='".$task_owner."'>
-                  <div class='form-group'>
-                  <div class='form-row'>
-                    <input type='text' class='form-control' placeholder='Enter Bid Amount' name='bid' required>
-                    <button class='btn btn-danger' name='submit' type='submit' >Submit Bid</button>
-                  </div>
-                  </div>
-                  <span>".$error."</span>
-                </div>
-              </form>
-            </div>
-      </div>";
-	}
-	
-	
-	echo"</div>";
 }
 ?>
 </body>
