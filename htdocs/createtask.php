@@ -31,7 +31,7 @@ if (isset($_POST['submit'])) {
 			  </button>
 			  You have successfully created a task!
 			</div>';
-			header("location: profile.php"); // Redirecting To Other Page
+			//header("location: profile.php"); // Redirecting To Other Page
 		} else {
 			$error = $end_time;
 			echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">

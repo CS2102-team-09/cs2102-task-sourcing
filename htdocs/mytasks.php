@@ -2,16 +2,14 @@
 include('session.php');
 $login_user = $_SESSION['login_user'];
 $connection = pg_connect("host=localhost port=5432 dbname=Project1 user=postgres password=postgres");
-$query = pg_query($connection, "SELECT test.task_id, test_next.owner, test_next.task_title, test_next.description, test_next.status, test_next.date, test_next.start_time, test_next.end_time, test_next.bidder, test_next.amount
-FROM (SELECT test.task_id, MAX(test.amount) AS amount
-FROM(SELECT b.task_id, b.user_id AS owner, b.task_title, b.description, b.status, b.date, b.start_time, b.end_time, t.user_id AS bidder, CASE WHEN t.amount IS NULL THEN 0 ELSE t.amount END
-FROM task_bid_by t RIGHT OUTER JOIN task_managed_by b ON t.task_id = b.task_id
-ORDER BY b.task_id, t.amount DESC) AS test
-GROUP BY test.task_id) AS test, (SELECT b.task_id, b.user_id AS owner, b.task_title, b.description, b.status, b.date, b.start_time, b.end_time, t.user_id AS bidder, CASE WHEN t.amount IS NULL THEN 0 ELSE t.amount END
-FROM task_bid_by t RIGHT OUTER JOIN task_managed_by b ON t.task_id = b.task_id
-ORDER BY b.task_id, t.amount DESC) AS test_next
-WHERE test.amount = test_next.amount
-AND test.task_id = test_next.task_id");
+$query = pg_query($connection, "SELECT m.task_id, m.user_id AS owner, m.task_title, m.description, m.status, m.date, m.start_time, m.end_time, b.user_id AS bidder, (CASE WHEN b.amount is null then 0 else b.amount END) AS amount
+from task_bid_by b right outer join task_managed_by m ON m.task_id = b.task_id
+WHERE (b.amount >= (select max(b2.amount) from task_bid_by b2 where b2.task_id = b.task_id GROUP BY b2.task_id)
+OR b.amount is null)
+AND m.user_id = '$login_user'
+GROUP BY m.task_id, m.user_id, m.task_title, m.description, m.status, m.date, m.start_time, m.end_time, b.user_id, b.amount
+ORDER BY m.status DESC, m.task_id ASC, b.amount DESC");
+
 if (!$query) {
     echo "Invalid query provided.";
 }
@@ -31,6 +29,31 @@ if (isset($_POST['update'])) {
         $error = 'Invalid query provided, please try again!';
     }
 }
+
+if (isset($_POST['close'])) {
+	//Find winning bidder_id
+    $amount = $_POST['amount'];
+    $task_id = $_POST['task_id'];
+	$bidQuery = pg_query($connection, "SELECT user_id FROM task_bid_by
+										WHERE task_id='$task_id' AND amount='$amount'");
+	
+	if ($bidQuery) {
+        $row = pg_fetch_row($bidQuery);
+		$bidder_id = $row[0];
+    } else {
+        $error = 'Invalid query provided, please try again!';
+    }
+
+	$update_task = pg_query($connection, "UPDATE task_managed_by SET winning_bid='$amount', winner = '$bidder_id', status = 'completed'
+												WHERE task_id='$task_id' ");
+
+	if ($update_task) {
+        header("location: profile.php");
+    } else {
+        $error = 'Invalid query provided, please try again!';
+    }
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -99,9 +122,8 @@ while($row = pg_fetch_array($query)) {
     $task_description = $row["description"];
     $task_id = $row["task_id"];
     $amount = $row["amount"];
-	
-	//temp method. need rewrite query
-	if ($login_user==$task_owner) {
+
+
     echo "
 				
 				
@@ -117,7 +139,6 @@ while($row = pg_fetch_array($query)) {
     <button type=\"button\" class=\"list-group-item list-group-item-action\">Current Bid: $" . $amount . "</button>
     
     </div>
-
         <button id='editbutton".$i."' type='button' class='btn btn-success'>Edit</button>
             <script type='text/javascript'>
                 $('#editbutton".$i."').on('click', function (e) {
@@ -142,10 +163,27 @@ while($row = pg_fetch_array($query)) {
                   <span>".$error."</span>
                 </div>
               </form>
-            </div>
+            </div>";
+
+		if ($task_status != 'completed' and $amount != 0) {
+			echo "
+			<form action='' method='post'>
+			<div class='container'>
+				<input type='hidden' id='task_id' name='task_id' value='".$task_id."'>
+				<input type='hidden' id='amount' name='amount' value='".$amount."'>
+				<div class='form-group'>
+				<div class='form-row'>
+				<button class='btn btn-success' name='close' type='submit' >Close</button>
+				</div>
+				</div>
+				<span>".$error."</span>
+			</div>
+			</form>";
+		}
+		echo "
+
       </div>
 	</div>";
-	}
 }
 ?>
 </body>
