@@ -40,7 +40,7 @@ CREATE TABLE task_bid_by (
 	FOREIGN KEY (task_id) REFERENCES task_managed_by(task_id)
 		ON DELETE CASCADE ON UPDATE CASCADE,
 	
-	PRIMARY KEY(user_id, task_id)
+	PRIMARY KEY(user_id, task_id, amount)
 );
 
 CREATE OR REPLACE FUNCTION add_bid()
