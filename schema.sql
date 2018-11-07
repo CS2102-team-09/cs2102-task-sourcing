@@ -109,3 +109,21 @@ on users
 FOR EACH ROW
 WHEN (OLD.is_admin = True)
 EXECUTE PROCEDURE disable_delete_admin();
+
+CREATE OR REPLACE FUNCTION no_split_power()
+	RETURNS TRIGGER AS $$
+	BEGIN
+		IF ((SELECT COUNT(*) FROM task_managed_by WHERE user_id = NEW.user_id AND date = NEW.date AND start_time <= NEW.start_time
+			AND end_time >= NEW.start_time) >= 1) THEN
+			RAISE NOTICE 'A user cannot be at two places at once';
+			RETURN NULL;
+		END IF;
+		RETURN NEW;
+	END;
+	$$ LANGUAGE PLPGSQL;
+
+CREATE TRIGGER no_split_power
+BEFORE INSERT OR UPDATE
+ON task_managed_by
+FOR EACH ROW
+EXECUTE PROCEDURE no_split_power();
