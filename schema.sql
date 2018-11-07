@@ -76,4 +76,22 @@ CREATE TRIGGER remove_bid_status
 	FOR EACH ROW
 	EXECUTE PROCEDURE remove_bid();
 
+CREATE OR REPLACE FUNCTION remove_invalid_bids()
+	RETURNS TRIGGER AS $$
+	DECLARE
+		current_bid NUMERIC := (SELECT (CASE WHEN highest_bid.amount IS NULL THEN 0 ELSE highest_bid.amount END) FROM (SELECT MAX(amount) AS amount FROM task_bid_by WHERE task_id = NEW.task_id) AS highest_bid);
+	BEGIN
+		IF (current_bid >= NEW.amount) THEN
+			RAISE NOTICE 'Given bid is % , highest bid so far is % . Please input a bid higher than existing bid.', NEW.amount, current_bid;
+			RETURN NULL;
+		END IF;
+		RETURN NEW;
+		END; $$
+		LANGUAGE PLPGSQL;
+
+CREATE TRIGGER remove_invalid_bids
+BEFORE INSERT OR UPDATE
+ON task_bid_by
+FOR EACH ROW
+EXECUTE PROCEDURE remove_invalid_bids();
 
