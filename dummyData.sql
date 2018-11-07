@@ -28,13 +28,13 @@ INSERT INTO task_managed_by (task_id, task_title, user_id, status, date, start_t
 INSERT INTO task_managed_by (task_id, task_title, user_id, status, date, start_time, end_time, description)
 	VALUES ('00000006', 'Supper Delivery Services', 'samy', 'no_bids', '2018-11-21', '20:00', '22:00', 'Supper Delivery Services');
 INSERT INTO task_managed_by (task_id, task_title, user_id, status, date, start_time, end_time, description)
-	VALUES ('00000007', 'Parcel Delivery Services', 'Seng', 'no_bids', '2018-10-25', '07:00', '09:30', 'Parcel Delivery Services');
+	VALUES ('00000007', 'Parcel Delivery Services', 'Seng', 'no_bids', '2018-12-30', '07:00', '09:30', 'Parcel Delivery Services');
 INSERT INTO task_managed_by (task_id, task_title, user_id, status, date, start_time, end_time, description)
 	VALUES ('00000008', 'Plumbing Services', 'tom', 'no_bids', '2018-11-21', '10:00', '22:00', 'Plumbing Services');
 INSERT INTO task_managed_by (task_id, task_title, user_id, status, date, start_time, end_time, description)
-	VALUES ('00000009', 'Vacuuming Services', 'alice', 'no_bids', '2018-10-15', '08:00', '20:00', 'Vacuuming Services');
+	VALUES ('00000009', 'Vacuuming Services', 'alice', 'no_bids', '2018-12-29', '08:00', '20:00', 'Vacuuming Services');
 INSERT INTO task_managed_by (task_id, task_title, user_id, status, date, start_time, end_time, description)
-	VALUES ('00000010', 'Dish Washing Services', 'alice', 'no_bids', '2018-11-29', '07:00', '09:00', 'Dish Washing Services');
+	VALUES ('00000010', 'Dish Washing Services', 'alice', 'no_bids', '2019-01-01', '07:00', '09:00', 'Dish Washing Services');
 INSERT INTO task_managed_by (task_id, task_title, user_id, status, date, start_time, end_time, description)
 	VALUES ('00000011', 'Bathroom Washing Services', 'alice', 'no_bids', '2018-11-21', '11:00', '12:00', 'Bathroom Washing Services');
 INSERT INTO task_managed_by (task_id, task_title, user_id, status, date, start_time, end_time, description)
@@ -44,11 +44,11 @@ INSERT INTO task_managed_by (task_id, task_title, user_id, status, date, start_t
 INSERT INTO task_managed_by (task_id, task_title, user_id, status, date, start_time, end_time, description)
 	VALUES ('00000014', 'Supper Delivery Services', 'samy', 'no_bids', '2018-11-21', '20:00', '22:00', 'Supper Delivery Services');
 INSERT INTO task_managed_by (task_id, task_title, user_id, status, date, start_time, end_time, description)
-	VALUES ('00000015', 'One on One Tuition', 'sully', 'no_bids', '2018-10-25', '16:00', '18:00', 'Slot 1');
+	VALUES ('00000015', 'One on One Tuition', 'sully', 'no_bids', '2019-01-02', '16:00', '18:00', 'Slot 1');
 INSERT INTO task_managed_by (task_id, task_title, user_id, status, date, start_time, end_time, description)
-	VALUES ('00000016', 'One on One Tuition', 'sully', 'no_bids', '2018-10-25', '18:30', '20:30', 'Slot 2');
+	VALUES ('00000016', 'One on One Tuition', 'sully', 'no_bids', '2019-01-02', '18:30', '20:30', 'Slot 2');
 INSERT INTO task_managed_by (task_id, task_title, user_id, status, date, start_time, end_time, description)
-	VALUES ('00000017', 'One on One Tuition', 'sully', 'no_bids', '2018-10-25', '21:00', '23:00', 'Slot 3');
+	VALUES ('00000017', 'One on One Tuition', 'sully', 'no_bids', '2019-01-02', '21:00', '23:00', 'Slot 3');
 INSERT INTO task_managed_by (task_id, task_title, user_id, status, date, start_time, end_time, description)
 	VALUES ('00000018', 'Online Tuition', 'sully', 'no_bids', '2018-11-22', '08:00', '22:00', 'Revision Online');
 INSERT INTO task_managed_by (task_id, task_title, user_id, status, date, start_time, end_time, description)
@@ -60,11 +60,11 @@ INSERT INTO task_managed_by (task_id, task_title, user_id, status, date, start_t
 INSERT INTO task_managed_by (task_id, task_title, user_id, status, date, start_time, end_time, description)
 	VALUES ('00000021', 'Maintain lift', 'tom', 'no_bids', '2018-11-25', '08:00', '18:00', 'Lift Maintanence');
 INSERT INTO task_managed_by (task_id, task_title, user_id, status, date, start_time, end_time, description)
-	VALUES ('00000022', 'Laundry', 'alice', 'no_bids', '2018-11-13', '08:00', '13:00', 'Laundry Services');
+	VALUES ('00000022', 'Laundry', 'alice', 'no_bids', '2019-01-02', '08:00', '13:00', 'Laundry Services');
 INSERT INTO task_managed_by (task_id, task_title, user_id, status, date, start_time, end_time, description)
-	VALUES ('00000024', 'Mopping', 'alice', 'no_bids', '2018-10-25', '21:00', '23:00', 'Mopping Services');
+	VALUES ('00000024', 'Mopping', 'alice', 'no_bids', '2019-01-02', '21:00', '23:00', 'Mopping Services');
 INSERT INTO task_managed_by (task_id, task_title, user_id, status, date, start_time, end_time, description)
-	VALUES ('00000023', 'Home Pet Consultation', 'charlene', 'no_bids', '2018-10-26', '00:00', '23:59', 'Full Day Home Pet Visit');
+	VALUES ('00000023', 'Home Pet Consultation', 'charlene', 'no_bids', '2019-01-05', '00:00', '23:59', 'Full Day Home Pet Visit');
 INSERT INTO task_managed_by (task_id, task_title, user_id, status, date, start_time, end_time, description)
 	VALUES ('00000025', 'Taxi for Pets', 'sarah', 'no_bids', '2018-11-22', '08:00', '18:00', 'Pet Taxi');
 INSERT INTO task_managed_by (task_id, task_title, user_id, status, date, start_time, end_time, description)
@@ -76,11 +76,11 @@ INSERT INTO task_managed_by (task_id, task_title, user_id, status, date, start_t
 INSERT INTO task_managed_by (task_id, task_title, user_id, status, date, start_time, end_time, description)
 	VALUES ('00000029', 'Painter for Hire', 'Lee', 'no_bids', '2018-11-20', '13:00', '18:00', 'Afternoon slot');
 INSERT INTO task_managed_by (task_id, task_title, user_id, status, date, start_time, end_time, description)
-	VALUES ('00000030', 'Daycare for children', 'Nancy', 'no_bids', '2018-10-25', '08:00', '18:00', 'Daycare');
+	VALUES ('00000030', 'Daycare for children', 'Nancy', 'no_bids', '2019-01-02', '08:00', '18:00', 'Daycare');
 INSERT INTO task_managed_by (task_id, task_title, user_id, status, date, start_time, end_time, description)
-	VALUES ('00000031', 'Pick up service', 'Nancy', 'no_bids', '2018-10-25', '18:30', '20:30', 'Pick up children');
+	VALUES ('00000031', 'Pick up service', 'Nancy', 'no_bids', '2019-01-02', '18:30', '20:30', 'Pick up children');
 INSERT INTO task_managed_by (task_id, task_title, user_id, status, date, start_time, end_time, description)
-	VALUES ('00000032', 'Private cab', 'Seng', 'no_bids', '2018-10-25', '09:00', '23:00', 'Private Hire Cab Services');
+	VALUES ('00000032', 'Private cab', 'Seng', 'no_bids', '2019-01-03', '09:00', '23:00', 'Private Hire Cab Services');
 INSERT INTO task_managed_by (task_id, task_title, user_id, status, date, start_time, end_time, description)
 	VALUES ('00000036', 'Private cab', 'Seng', 'no_bids', '2018-11-22', '09:00', '22:00', 'Private Hire Cab Services');
 INSERT INTO task_managed_by (task_id, task_title, user_id, status, date, start_time, end_time, description)

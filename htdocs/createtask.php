@@ -69,13 +69,13 @@ if (isset($_POST['submit'])) {
                 <a class="nav-link" href="profile.php"> Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="bids.php"> Display Bids <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="bids.php"> My Bids <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link active" href="createtask.php"> Create a Task <span class="sr-only">(current)</span></a>
+                <a class="nav-link active" href="createtask.php"> Create New <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="tasks.php"> Manage Tasks <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="tasks.php"> All Tasks <span class="sr-only">(current)</span></a>
             </li>
         </ul>
 

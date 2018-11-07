@@ -45,13 +45,13 @@ if (isset($_SESSION['login_user'])) {
                 <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Bid a Task <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="#">My Bids <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="createtask.php">Create a Task <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="createtask.php">Create New <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Manage Tasks <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="#">All Tasks <span class="sr-only">(current)</span></a>
             </li>
         </ul>
 
