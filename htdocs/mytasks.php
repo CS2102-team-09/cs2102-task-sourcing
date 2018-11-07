@@ -137,7 +137,7 @@ while($row = pg_fetch_array($query)) {
         <button type=\"button\" class=\"list-group-item list-group-item-action\">Start Time: " . $task_starttime . "</button>
         <button type=\"button\" class=\"list-group-item list-group-item-action\">End Time: " . $task_endtime . "</button>
         <button type=\"button\" class=\"list-group-item list-group-item-action\">Task Owner: " . $task_owner . "</button>
-        <button type=\"button\" class=\"list-group-item list-group-item-action\">Current Bid: $" . $amount . "</button>
+        <button type=\"button\" class=\"list-group-item list-group-item-action\">Winning Bid: $" . $amount . "</button>
         </div>
         </div>";
 
