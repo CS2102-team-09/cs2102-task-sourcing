@@ -1,6 +1,6 @@
 <?php
 include('session.php');
-include ('./components/profileHeader.html');
+include('./components/profile_header.html');
 if (isset($_POST['submit'])) {
 	if (empty($_POST['title']) || empty($_POST['description'])) {
 		$error = "Please fill in all the fields!";
