@@ -76,4 +76,54 @@ CREATE TRIGGER remove_bid_status
 	FOR EACH ROW
 	EXECUTE PROCEDURE remove_bid();
 
+CREATE OR REPLACE FUNCTION remove_invalid_bids()
+	RETURNS TRIGGER AS $$
+	DECLARE
+		current_bid NUMERIC := (SELECT (CASE WHEN highest_bid.amount IS NULL THEN 0 ELSE highest_bid.amount END) FROM (SELECT MAX(amount) AS amount FROM task_bid_by WHERE task_id = NEW.task_id) AS highest_bid);
+	BEGIN
+		IF (current_bid >= NEW.amount) THEN
+			RAISE NOTICE 'Given bid is % , highest bid so far is % . Please input a bid higher than existing bid.', NEW.amount, current_bid;
+			RETURN NULL;
+		END IF;
+		RETURN NEW;
+		END; $$
+		LANGUAGE PLPGSQL;
 
+CREATE TRIGGER remove_invalid_bids
+BEFORE INSERT OR UPDATE
+ON task_bid_by
+FOR EACH ROW
+EXECUTE PROCEDURE remove_invalid_bids();
+
+CREATE OR REPLACE FUNCTION disable_delete_admin()
+	RETURNS TRIGGER AS $$
+	BEGIN
+		RAISE NOTICE 'Attempting to delete admin. Operation void';
+		RETURN NULL;
+	END;
+	$$ LANGUAGE PLPGSQL;
+
+CREATE TRIGGER disable_delete_admin
+BEFORE DELETE
+on users
+FOR EACH ROW
+WHEN (OLD.is_admin = True)
+EXECUTE PROCEDURE disable_delete_admin();
+
+CREATE OR REPLACE FUNCTION no_split_power()
+	RETURNS TRIGGER AS $$
+	BEGIN
+		IF ((SELECT COUNT(*) FROM task_managed_by WHERE user_id = NEW.user_id AND date = NEW.date AND start_time <= NEW.start_time
+			AND end_time >= NEW.start_time) >= 1) THEN
+			RAISE NOTICE 'A user cannot be at two places at once';
+			RETURN NULL;
+		END IF;
+		RETURN NEW;
+	END;
+	$$ LANGUAGE PLPGSQL;
+
+CREATE TRIGGER no_split_power
+BEFORE INSERT OR UPDATE
+ON task_managed_by
+FOR EACH ROW
+EXECUTE PROCEDURE no_split_power();
