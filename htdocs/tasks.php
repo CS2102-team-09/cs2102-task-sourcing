@@ -21,7 +21,7 @@ if (isset($_POST['submit'])) {
     $taskid = $_POST['task_id'];
     $userid = $_SESSION['login_user'];
     $add_task = pg_query($connection, "INSERT INTO task_bid_by(task_id, user_id, amount) VALUES( 
-										'$taskid', '$userid', '$bid_amount')");
+                                        '$taskid', '$userid', '$bid_amount')");
     if ($add_task) {
         header("location: profile.php");
     } else {
@@ -96,46 +96,131 @@ while($row = pg_fetch_array($query)) {
     $task_description = $row["description"];
     $task_id = $row["task_id"];
     $amount = $row["amount"];
-    echo "
-				
-				
-				
-<div class='container' style='padding-top: 30px'>
-<div class=\"list-group\">
-    <button type=\"button\" class=\"list-group-item list-group-item-action list-group-item-primary\">Task Title: " . $task_title . " <span class='badge badge-danger' style='margin-left: 15px'>" . $task_status . "</span></button>
-    <button type=\"button\" class=\"list-group-item list-group-item-action\">Description: " . $task_description . "</button>
-    <button type=\"button\" class=\"list-group-item list-group-item-action\">Date: " . $task_date . "</button>
-    <button type=\"button\" class=\"list-group-item list-group-item-action\">Start Time: " . $task_starttime . "</button>
-    <button type=\"button\" class=\"list-group-item list-group-item-action\">End Time: " . $task_endtime . "</button>
-    <button type=\"button\" class=\"list-group-item list-group-item-action\">Task Owner: " . $task_owner . "</button>
-    <button type=\"button\" class=\"list-group-item list-group-item-action\">Current Bid: $" . $amount . "</button>
-    
-    </div>
-        <button id='addbidbutton".$i."' type='button' class='btn btn-success'>Add bid</button>
-            <script type='text/javascript'>
-                $('#addbidbutton".$i."').on('click', function (e) {
-                     var modal = document.getElementById('addbid".$i."');
-                     modal.style.display = 'inline-block';
-                })
-            </script>
-            <div style='display:none' id='addbid".$i."' >
-                <form action='' method='post'>
-                <div class='container'>
-                  <input type='hidden' id='task_id' name='task_id' value='".$task_id."'>
-                  <input type='hidden' id='user_id' name='user_id' value='".$task_owner."'>
-                  <div class='form-group'>
-                  <div class='form-row'>
-                    <input type='text' class='form-control' placeholder='Enter Bid Amount' name='bid' required>
-                    <button class='btn btn-danger' name='submit' type='submit' >Submit Bid</button>
-                  </div>
-                  </div>
-                  <span>".$error."</span>
+
+    if ($task_status == 'no_bids') {
+        echo "
+                    
+                    
+                    
+    <div class='container' style='padding-top: 30px'>
+    <div class=\"list-group\">
+        <button type=\"button\" class=\"list-group-item list-group-item-action list-group-item-primary\">Task Title: " . $task_title . " <span class='badge badge-danger' style='margin-left: 15px'>" . $task_status . "</span></button>
+        <button type=\"button\" class=\"list-group-item list-group-item-action\">Description: " . $task_description . "</button>
+        <button type=\"button\" class=\"list-group-item list-group-item-action\">Date: " . $task_date . "</button>
+        <button type=\"button\" class=\"list-group-item list-group-item-action\">Start Time: " . $task_starttime . "</button>
+        <button type=\"button\" class=\"list-group-item list-group-item-action\">End Time: " . $task_endtime . "</button>
+        <button type=\"button\" class=\"list-group-item list-group-item-action\">Task Owner: " . $task_owner . "</button>
+        <button type=\"button\" class=\"list-group-item list-group-item-action\">Current Bid: $" . $amount . "</button>
+        
+        </div>
+            <button id='addbidbutton" . $i . "' type='button' class='btn btn-success'>Add bid</button>
+                <script type='text/javascript'>
+                    $('#addbidbutton" . $i . "').on('click', function (e) {
+                         var modal = document.getElementById('addbid" . $i . "');
+                         modal.style.display = 'inline-block';
+                    })
+                </script>
+                <div style='display:none' id='addbid" . $i . "' >
+                    <form action='' method='post'>
+                    <div class='container'>
+                      <input type='hidden' id='task_id' name='task_id' value='" . $task_id . "'>
+                      <input type='hidden' id='user_id' name='user_id' value='" . $task_owner . "'>
+                      <div class='form-group'>
+                      <div class='form-row'>
+                        <input type='text' class='form-control' placeholder='Enter Bid Amount' name='bid' required>
+                        <button class='btn btn-danger' name='submit' type='submit' >Submit Bid</button>
+                      </div>
+                      </div>
+                      <span>" . $error . "</span>
+                    </div>
+                  </form>
                 </div>
-              </form>
-            </div>
-      </div>
-    </div>
-	        ";
+          </div>
+        </div>
+                ";
+    } elseif ($task_status == 'in_progress') {
+        echo "
+                    
+                    
+                    
+    <div class='container' style='padding-top: 30px'>
+    <div class=\"list-group\">
+        <button type=\"button\" class=\"list-group-item list-group-item-action list-group-item-primary\">Task Title: " . $task_title . " <span class='badge badge-warning' style='margin-left: 15px'>" . $task_status . "</span></button>
+        <button type=\"button\" class=\"list-group-item list-group-item-action\">Description: " . $task_description . "</button>
+        <button type=\"button\" class=\"list-group-item list-group-item-action\">Date: " . $task_date . "</button>
+        <button type=\"button\" class=\"list-group-item list-group-item-action\">Start Time: " . $task_starttime . "</button>
+        <button type=\"button\" class=\"list-group-item list-group-item-action\">End Time: " . $task_endtime . "</button>
+        <button type=\"button\" class=\"list-group-item list-group-item-action\">Task Owner: " . $task_owner . "</button>
+        <button type=\"button\" class=\"list-group-item list-group-item-action\">Current Bid: $" . $amount . "</button>
+        
+        </div>
+            <button id='addbidbutton" . $i . "' type='button' class='btn btn-success'>Add bid</button>
+                <script type='text/javascript'>
+                    $('#addbidbutton" . $i . "').on('click', function (e) {
+                         var modal = document.getElementById('addbid" . $i . "');
+                         modal.style.display = 'inline-block';
+                    })
+                </script>
+                <div style='display:none' id='addbid" . $i . "' >
+                    <form action='' method='post'>
+                    <div class='container'>
+                      <input type='hidden' id='task_id' name='task_id' value='" . $task_id . "'>
+                      <input type='hidden' id='user_id' name='user_id' value='" . $task_owner . "'>
+                      <div class='form-group'>
+                      <div class='form-row'>
+                        <input type='text' class='form-control' placeholder='Enter Bid Amount' name='bid' required>
+                        <button class='btn btn-danger' name='submit' type='submit' >Submit Bid</button>
+                      </div>
+                      </div>
+                      <span>" . $error . "</span>
+                    </div>
+                  </form>
+                </div>
+          </div>
+        </div>
+                ";
+    } else {
+        echo "
+                    
+                    
+                    
+    <div class='container' style='padding-top: 30px'>
+    <div class=\"list-group\">
+        <button type=\"button\" class=\"list-group-item list-group-item-action list-group-item-primary\">Task Title: " . $task_title . " <span class='badge badge-success' style='margin-left: 15px'>" . $task_status . "</span></button>
+        <button type=\"button\" class=\"list-group-item list-group-item-action\">Description: " . $task_description . "</button>
+        <button type=\"button\" class=\"list-group-item list-group-item-action\">Date: " . $task_date . "</button>
+        <button type=\"button\" class=\"list-group-item list-group-item-action\">Start Time: " . $task_starttime . "</button>
+        <button type=\"button\" class=\"list-group-item list-group-item-action\">End Time: " . $task_endtime . "</button>
+        <button type=\"button\" class=\"list-group-item list-group-item-action\">Task Owner: " . $task_owner . "</button>
+        <button type=\"button\" class=\"list-group-item list-group-item-action\">Winning Bid: $" . $amount . "</button>
+        
+        </div>
+            <button id='addbidbutton" . $i . "' type='button' class='btn btn-success'>Add bid</button>
+                <script type='text/javascript'>
+                    $('#addbidbutton" . $i . "').on('click', function (e) {
+                         var modal = document.getElementById('addbid" . $i . "');
+                         modal.style.display = 'inline-block';
+                    })
+                </script>
+                <div style='display:none' id='addbid" . $i . "' >
+                    <form action='' method='post'>
+                    <div class='container'>
+                      <input type='hidden' id='task_id' name='task_id' value='" . $task_id . "'>
+                      <input type='hidden' id='user_id' name='user_id' value='" . $task_owner . "'>
+                      <div class='form-group'>
+                      <div class='form-row'>
+                        <input type='text' class='form-control' placeholder='Enter Bid Amount' name='bid' required>
+                        <button class='btn btn-danger' name='submit' type='submit' >Submit Bid</button>
+                      </div>
+                      </div>
+                      <span>" . $error . "</span>
+                    </div>
+                  </form>
+                </div>
+          </div>
+        </div>
+                ";
+    }
 }
 ?>
 </body>
