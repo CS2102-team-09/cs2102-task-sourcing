@@ -10,7 +10,7 @@ WHERE (b.amount >= (select max(b2.amount) from task_bid_by b2 where b2.task_id =
 OR b.amount is null)
 AND m.user_id <> '$login_user'
 GROUP BY m.task_id, m.user_id, m.task_title, m.description, m.status, m.date, m.start_time, m.end_time, b.user_id, b.amount
-ORDER BY m.task_id ASC, b.amount DESC");
+ORDER BY m.status DESC, m.task_id ASC, b.amount DESC");
 
 if (!$query) {
     echo "Invalid query provided.";
