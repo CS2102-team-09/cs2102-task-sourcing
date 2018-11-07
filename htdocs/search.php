@@ -1,7 +1,7 @@
 <?php
 include('session.php');
 $login_user = $_SESSION['login_user'];
-$connection = pg_connect("host=localhost port=5432 dbname=Project1 user=postgres password=password");
+$connection = pg_connect("host=localhost port=5432 dbname=Project1 user=postgres password=postgres");
 	
 $error='';
 
@@ -129,10 +129,12 @@ if (isset($_POST['close'])) {
         crossorigin="anonymous">
 </script>
 
+        <div class="container" style="padding-top: 30px">
 		<form method="POST" action="search.php">
 			<input type="text" name="q" placeholder="Search for task title">
 			<input type="submit" name="search" value="Search">
 		</form>
+        </div>
 <?php		
 		$i = 0;
 			// output data of each row
