@@ -2,16 +2,15 @@
 include('session.php');
 $connection = pg_connect("host=localhost port=5432 dbname=Project1 user=postgres password=postgres");
 
-$query = pg_query($connection, "SELECT test.task_id, test_next.owner, test_next.task_title, test_next.description, test_next.status, test_next.date, test_next.start_time, test_next.end_time, test_next.bidder, test_next.amount
-FROM (SELECT test.task_id, MAX(test.amount) AS amount
-FROM(SELECT b.task_id, b.user_id AS owner, b.task_title, b.description, b.status, b.date, b.start_time, b.end_time, t.user_id AS bidder, CASE WHEN t.amount IS NULL THEN 0 ELSE t.amount END
-FROM task_bid_by t RIGHT OUTER JOIN task_managed_by b ON t.task_id = b.task_id
-ORDER BY b.task_id, t.amount DESC) AS test
-GROUP BY test.task_id) AS test, (SELECT b.task_id, b.user_id AS owner, b.task_title, b.description, b.status, b.date, b.start_time, b.end_time, t.user_id AS bidder, CASE WHEN t.amount IS NULL THEN 0 ELSE t.amount END
-FROM task_bid_by t RIGHT OUTER JOIN task_managed_by b ON t.task_id = b.task_id
-ORDER BY b.task_id, t.amount DESC) AS test_next
-WHERE test.amount = test_next.amount
-AND test.task_id = test_next.task_id");
+$login_user = $_SESSION['login_user'];
+
+$query = pg_query($connection, "SELECT m.task_id, m.user_id AS owner, m.task_title, m.description, m.status, m.date, m.start_time, m.end_time, b.user_id AS bidder, (CASE WHEN b.amount is null then 0 else b.amount END) AS amount
+from task_bid_by b right outer join task_managed_by m ON m.task_id = b.task_id
+WHERE (b.amount >= (select max(b2.amount) from task_bid_by b2 where b2.task_id = b.task_id GROUP BY b2.task_id)
+OR b.amount is null)
+AND m.user_id <> '$login_user'
+GROUP BY m.task_id, m.user_id, m.task_title, m.description, m.status, m.date, m.start_time, m.end_time, b.user_id, b.amount
+ORDER BY m.status DESC, m.task_id ASC, b.amount DESC");
 
 if (!$query) {
     echo "Invalid query provided.";
