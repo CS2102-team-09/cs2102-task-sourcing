@@ -43,8 +43,9 @@ if (isset($_POST['update'])) {
 }
 
 if (isset($_POST['delete'])) {
-    $delete_task = pg_query($connection, "DELETE FROM task_managed_by WHERE task_id = '$_POST[task_id]'");
-    $delete_task = pg_query($connection, "DELETE FROM task_bid_by WHERE task_id = $_POST[task_id]");
+    $task_id = $_POST['task_id'];
+    $delete_task = pg_query($connection, "DELETE FROM task_managed_by WHERE task_id = '$task_id'");
+    $delete_task = pg_query($connection, "DELETE FROM task_bid_by WHERE task_id = '$task_id'");
     header("Refresh:0");
 }
 
