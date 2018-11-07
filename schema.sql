@@ -95,3 +95,17 @@ ON task_bid_by
 FOR EACH ROW
 EXECUTE PROCEDURE remove_invalid_bids();
 
+CREATE OR REPLACE FUNCTION disable_delete_admin()
+	RETURNS TRIGGER AS $$
+	BEGIN
+		RAISE NOTICE 'Attempting to delete admin. Operation void';
+		RETURN NULL;
+	END;
+	$$ LANGUAGE PLPGSQL;
+
+CREATE TRIGGER disable_delete_admin
+BEFORE DELETE
+on users
+FOR EACH ROW
+WHEN (OLD.is_admin = True)
+EXECUTE PROCEDURE disable_delete_admin();
