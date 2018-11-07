@@ -17,12 +17,12 @@ $error='';
 if (isset($_POST['update'])) {
     $task_description = $_POST['task_description'];
     $taskid = $_POST['task_id'];
-	$task_title = $_POST['task_title'];
-	$task_date = $_POST['task_date'];
-	$task_starttime = $_POST['task_starttime'];
-	$task_endtime = $_POST['task_endtime'];
+    $task_title = $_POST['task_title'];
+    $task_date = $_POST['task_date'];
+    $task_starttime = $_POST['task_starttime'];
+    $task_endtime = $_POST['task_endtime'];
     $update_task = pg_query($connection, "UPDATE task_managed_by SET task_title='$task_title', description='$task_description', date='$task_date', start_time='$task_starttime', end_time='$task_endtime'
-												WHERE task_id='$taskid' ");
+                                                WHERE task_id='$taskid' ");
     if ($update_task) {
         header("location: profile.php");
     } else {
@@ -31,23 +31,23 @@ if (isset($_POST['update'])) {
 }
 
 if (isset($_POST['close'])) {
-	//Find winning bidder_id
+    //Find winning bidder_id
     $amount = $_POST['amount'];
     $task_id = $_POST['task_id'];
-	$bidQuery = pg_query($connection, "SELECT user_id FROM task_bid_by
-										WHERE task_id='$task_id' AND amount='$amount'");
-	
-	if ($bidQuery) {
+    $bidQuery = pg_query($connection, "SELECT user_id FROM task_bid_by
+                                        WHERE task_id='$task_id' AND amount='$amount'");
+    
+    if ($bidQuery) {
         $row = pg_fetch_row($bidQuery);
-		$bidder_id = $row[0];
+        $bidder_id = $row[0];
     } else {
         $error = 'Invalid query provided, please try again!';
     }
 
-	$update_task = pg_query($connection, "UPDATE task_managed_by SET winning_bid='$amount', winner = '$bidder_id', status = 'completed'
-												WHERE task_id='$task_id' ");
+    $update_task = pg_query($connection, "UPDATE task_managed_by SET winning_bid='$amount', winner = '$bidder_id', status = 'completed'
+                                                WHERE task_id='$task_id' ");
 
-	if ($update_task) {
+    if ($update_task) {
         header("location: profile.php");
     } else {
         $error = 'Invalid query provided, please try again!';
@@ -59,7 +59,7 @@ if (isset($_POST['close'])) {
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Tasks available</title>
+    <title>My Tasks</title>
     <link href="style.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -131,7 +131,7 @@ while($row = pg_fetch_array($query)) {
                     
     <div class='container' style='padding: 30px 0'>
     <div class=\"list-group\">
-        <button type=\"button\" class=\"list-group-item list-group-item-action list-group-item-primary\">Task Title: " . $task_title . " <span class='badge badge-danger' style='margin-left: 15px'>" . $task_status . "</span></button>
+        <button type=\"button\" class=\"list-group-item list-group-item-action list-group-item-primary\">Task Title: " . $task_title . " <span class='badge badge-success' style='margin-left: 15px'>" . $task_status . "</span></button>
         <button type=\"button\" class=\"list-group-item list-group-item-action\">Description: " . $task_description . "</button>
         <button type=\"button\" class=\"list-group-item list-group-item-action\">Date: " . $task_date . "</button>
         <button type=\"button\" class=\"list-group-item list-group-item-action\">Start Time: " . $task_starttime . "</button>
@@ -141,6 +141,47 @@ while($row = pg_fetch_array($query)) {
         </div>
         </div>";
 
+    } elseif ($task_status == 'in_progress') {
+        echo "
+                    
+                    
+                    
+    <div class='container' style='padding: 30px 0'>
+    <div class=\"list-group\">
+        <button type=\"button\" class=\"list-group-item list-group-item-action list-group-item-primary\">Task Title: " . $task_title . " <span class='badge badge-warning' style='margin-left: 15px'>" . $task_status . "</span></button>
+        <button type=\"button\" class=\"list-group-item list-group-item-action\">Description: " . $task_description . "</button>
+        <button type=\"button\" class=\"list-group-item list-group-item-action\">Date: " . $task_date . "</button>
+        <button type=\"button\" class=\"list-group-item list-group-item-action\">Start Time: " . $task_starttime . "</button>
+        <button type=\"button\" class=\"list-group-item list-group-item-action\">End Time: " . $task_endtime . "</button>
+        <button type=\"button\" class=\"list-group-item list-group-item-action\">Task Owner: " . $task_owner . "</button>
+        <button type=\"button\" class=\"list-group-item list-group-item-action\">Current Bid: $" . $amount . "</button>
+        
+        </div>
+            <button id='editbutton" . $i . "' type='button' class='btn btn-success'>Edit</button>
+                <script type='text/javascript'>
+                    $('#editbutton" . $i . "').on('click', function (e) {
+                         var modal = document.getElementById('edit" . $i . "');
+                         modal.style.display = 'inline-block';
+                    })
+                </script>
+                <div style='display:none' id='edit" . $i . "' >
+                    <form action='' method='post'>
+                    <div class='container'>
+                      <input type='hidden' id='task_id' name='task_id' value='" . $task_id . "'>
+                      <div class='form-group'>
+                      <div class='form-row'>
+                        <input type='text' class='form-control' name='task_title' value='" . $task_title . "' required>
+                        <input type='text' class='form-control' name='task_description' value='" . $task_description . "' required>
+                        <input type='date' class='form-control' name='task_date' value='" . $task_date . "' required>
+                        <input type='time' class='form-control' name='task_starttime' value='" . $task_starttime . "' required>
+                        <input type='time' class='form-control' name='task_endtime' value='" . $task_endtime . "' required>
+                        <button class='btn btn-danger' name='update' type='submit' >Submit</button>
+                      </div>
+                      </div>
+                      <span>" . $error . "</span>
+                    </div>
+                  </form>
+                </div>";
     } else {
         echo "
                     
@@ -184,25 +225,25 @@ while($row = pg_fetch_array($query)) {
                 </div>";
     }
 
-		if ($task_status != 'completed' and $amount != 0) {
-			echo "
-			<form action='' method='post'>
-			<div class='container'>
-				<input type='hidden' id='task_id' name='task_id' value='".$task_id."'>
-				<input type='hidden' id='amount' name='amount' value='".$amount."'>
-				<div class='form-group'>
-				<div class='form-row'>
-				<button class='btn btn-success' name='close' type='submit' >Close</button>
-				</div>
-				</div>
-				<span>".$error."</span>
-			</div>
-			</form>";
-		}
-		echo "
+        if ($task_status != 'completed' and $amount != 0) {
+            echo "
+            <form action='' method='post'>
+            <div class='container' style='padding: 10px 5px'>
+                <input type='hidden' id='task_id' name='task_id' value='".$task_id."'>
+                <input type='hidden' id='amount' name='amount' value='".$amount."'>
+                <div class='form-group'>
+                <div class='form-row'>
+                <button class='btn btn-primary' name='close' type='submit' >Accept</button>
+                </div>
+                </div>
+                <span>".$error."</span>
+            </div>
+            </form>";
+        }
+        echo "
 
       </div>
-	</div>";
+    </div>";
 }
 ?>
 </body>
