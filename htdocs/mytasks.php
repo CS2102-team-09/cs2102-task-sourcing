@@ -124,46 +124,65 @@ while($row = pg_fetch_array($query)) {
     $amount = $row["amount"];
 
 
-    echo "
-				
-				
-				
-<div class='container' style='padding: 30px 0'>
-<div class=\"list-group\">
-    <button type=\"button\" class=\"list-group-item list-group-item-action list-group-item-primary\">Task Title: " . $task_title . " <span class='badge badge-danger' style='margin-left: 15px'>" . $task_status . "</span></button>
-    <button type=\"button\" class=\"list-group-item list-group-item-action\">Description: " . $task_description . "</button>
-    <button type=\"button\" class=\"list-group-item list-group-item-action\">Date: " . $task_date . "</button>
-    <button type=\"button\" class=\"list-group-item list-group-item-action\">Start Time: " . $task_starttime . "</button>
-    <button type=\"button\" class=\"list-group-item list-group-item-action\">End Time: " . $task_endtime . "</button>
-    <button type=\"button\" class=\"list-group-item list-group-item-action\">Task Owner: " . $task_owner . "</button>
-    <button type=\"button\" class=\"list-group-item list-group-item-action\">Current Bid: $" . $amount . "</button>
-    
-    </div>
-        <button id='editbutton".$i."' type='button' class='btn btn-success'>Edit</button>
-            <script type='text/javascript'>
-                $('#editbutton".$i."').on('click', function (e) {
-                     var modal = document.getElementById('edit".$i."');
-                     modal.style.display = 'inline-block';
-                })
-            </script>
-            <div style='display:none' id='edit".$i."' >
-                <form action='' method='post'>
-                <div class='container'>
-                  <input type='hidden' id='task_id' name='task_id' value='".$task_id."'>
-                  <div class='form-group'>
-                  <div class='form-row'>
-                    <input type='text' class='form-control' name='task_title' value='".$task_title."' required>
-					<input type='text' class='form-control' name='task_description' value='".$task_description."' required>
-					<input type='date' class='form-control' name='task_date' value='".$task_date."' required>
-					<input type='time' class='form-control' name='task_starttime' value='".$task_starttime."' required>
-					<input type='time' class='form-control' name='task_endtime' value='".$task_endtime."' required>
-					<button class='btn btn-danger' name='update' type='submit' >Submit</button>
-                  </div>
-                  </div>
-                  <span>".$error."</span>
-                </div>
-              </form>
-            </div>";
+    if ($task_status == 'completed') {
+        echo "
+                    
+                    
+                    
+    <div class='container' style='padding: 30px 0'>
+    <div class=\"list-group\">
+        <button type=\"button\" class=\"list-group-item list-group-item-action list-group-item-primary\">Task Title: " . $task_title . " <span class='badge badge-danger' style='margin-left: 15px'>" . $task_status . "</span></button>
+        <button type=\"button\" class=\"list-group-item list-group-item-action\">Description: " . $task_description . "</button>
+        <button type=\"button\" class=\"list-group-item list-group-item-action\">Date: " . $task_date . "</button>
+        <button type=\"button\" class=\"list-group-item list-group-item-action\">Start Time: " . $task_starttime . "</button>
+        <button type=\"button\" class=\"list-group-item list-group-item-action\">End Time: " . $task_endtime . "</button>
+        <button type=\"button\" class=\"list-group-item list-group-item-action\">Task Owner: " . $task_owner . "</button>
+        <button type=\"button\" class=\"list-group-item list-group-item-action\">Current Bid: $" . $amount . "</button>
+        </div>
+        </div>";
+
+    } else {
+        echo "
+                    
+                    
+                    
+    <div class='container' style='padding: 30px 0'>
+    <div class=\"list-group\">
+        <button type=\"button\" class=\"list-group-item list-group-item-action list-group-item-primary\">Task Title: " . $task_title . " <span class='badge badge-danger' style='margin-left: 15px'>" . $task_status . "</span></button>
+        <button type=\"button\" class=\"list-group-item list-group-item-action\">Description: " . $task_description . "</button>
+        <button type=\"button\" class=\"list-group-item list-group-item-action\">Date: " . $task_date . "</button>
+        <button type=\"button\" class=\"list-group-item list-group-item-action\">Start Time: " . $task_starttime . "</button>
+        <button type=\"button\" class=\"list-group-item list-group-item-action\">End Time: " . $task_endtime . "</button>
+        <button type=\"button\" class=\"list-group-item list-group-item-action\">Task Owner: " . $task_owner . "</button>
+        <button type=\"button\" class=\"list-group-item list-group-item-action\">Current Bid: $" . $amount . "</button>
+        
+        </div>
+            <button id='editbutton" . $i . "' type='button' class='btn btn-success'>Edit</button>
+                <script type='text/javascript'>
+                    $('#editbutton" . $i . "').on('click', function (e) {
+                         var modal = document.getElementById('edit" . $i . "');
+                         modal.style.display = 'inline-block';
+                    })
+                </script>
+                <div style='display:none' id='edit" . $i . "' >
+                    <form action='' method='post'>
+                    <div class='container'>
+                      <input type='hidden' id='task_id' name='task_id' value='" . $task_id . "'>
+                      <div class='form-group'>
+                      <div class='form-row'>
+                        <input type='text' class='form-control' name='task_title' value='" . $task_title . "' required>
+                        <input type='text' class='form-control' name='task_description' value='" . $task_description . "' required>
+                        <input type='date' class='form-control' name='task_date' value='" . $task_date . "' required>
+                        <input type='time' class='form-control' name='task_starttime' value='" . $task_starttime . "' required>
+                        <input type='time' class='form-control' name='task_endtime' value='" . $task_endtime . "' required>
+                        <button class='btn btn-danger' name='update' type='submit' >Submit</button>
+                      </div>
+                      </div>
+                      <span>" . $error . "</span>
+                    </div>
+                  </form>
+                </div>";
+    }
 
 		if ($task_status != 'completed' and $amount != 0) {
 			echo "
