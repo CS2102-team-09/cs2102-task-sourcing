@@ -1,6 +1,6 @@
 <?php
 include('session.php');
-include ('./components/profileHeader.html');
+include('./components/profile_header.php');
 $connection = pg_connect("host=localhost port=5432 dbname=Project1 user=postgres password=postgres");
 $signin_user = $_SESSION['login_user'];
 $query = pg_query($connection, "SELECT * FROM task_bid_by WHERE user_id='$signin_user'");

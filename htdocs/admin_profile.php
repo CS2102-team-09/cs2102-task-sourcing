@@ -1,6 +1,6 @@
 <?php
-include('session.php');
-include('./components/profile_header.php');
+include ('admin_session.php');
+include('./components/admin_header.html');
 ?>
 <!DOCTYPE html>
 <html>
@@ -17,15 +17,9 @@ include('./components/profile_header.php');
 
 <div class="container h-100 d-flex justify-content-center" style="margin-top: 100px">
     <div class="jumbotron my-auto">
-        <h1 class="display-3">Hello, <?php echo $login_session; ?>!</h1>
+        <h1 class="display-3">Hello, Admin!</h1>
     </div>
 </div>
-
-<?php
-include ('./components/generic_task.php')
-?>
-
-
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
