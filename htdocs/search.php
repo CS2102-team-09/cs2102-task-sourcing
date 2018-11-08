@@ -4,6 +4,17 @@ include('./components/profile_header.php');
 $login_user = $_SESSION['login_user'];
 $connection = pg_connect("host=localhost port=5432 dbname=Project1 user=postgres password=postgres");
 $error = '';
+$error_message = "";
+
+function get_string_between($string, $start, $end){
+    $string = ' ' . $string;
+    $ini = strpos($string, $start);
+    if ($ini == 0) return '';
+    $ini += strlen($start);
+    $len = strpos($string, $end, $ini) - $ini;
+    return substr($string, $ini, $len);
+}
+
 if (isset($_POST['search'])) {
     $search = $_POST['q'];
     $query = pg_query($connection, "SELECT m.task_id, m.user_id AS owner, m.task_title, m.description, m.status, m.date, m.start_time, m.end_time, b.user_id AS bidder, (CASE WHEN b.amount is null then 0 else b.amount END) AS amount
@@ -18,12 +29,20 @@ if (isset($_POST['submit'])) {
     $bid_amount = $_POST['bid'];
     $taskid = $_POST['task_id'];
     $userid = $_SESSION['login_user'];
+    set_error_handler(function($errno, $errstr) use( &$error_message) { $error_message = $errstr; });
     $add_task = pg_query($connection, "INSERT INTO task_bid_by(task_id, user_id, amount) VALUES( 
 										'$taskid', '$userid', '$bid_amount')");
+    restore_error_handler();
+    $error_message = get_string_between($error_message, 'ERROR: ', 'CONTEXT:');
+
     if ($add_task) {
         header("location: profile.php");
     } else {
-        $error = 'Invalid query provided, please try again!';
+        echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+			  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			  </button> '. $error_message .'
+			</div>';
     }
 }
 if (isset($_POST['update'])) {
