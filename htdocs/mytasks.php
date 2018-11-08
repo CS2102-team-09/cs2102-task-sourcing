@@ -70,7 +70,7 @@ while ($row = pg_fetch_array($query)) {
                     
                     
                     
-    <div class='container' style='padding: 30px 0'>
+    <div class='container' style='padding-top: 30px'>
     <div class=\"list-group\">
         <button type=\"button\" class=\"list-group-item list-group-item-action list-group-item-primary\">Task Title: " . $task_title . " <span class='badge badge-success' style='margin-left: 15px'>" . $task_status . "</span></button>
         <button type=\"button\" class=\"list-group-item list-group-item-action\">Description: " . $task_description . "</button>
@@ -86,7 +86,7 @@ while ($row = pg_fetch_array($query)) {
                     
                     
                     
-    <div class='container' style='padding: 30px 0'>
+    <div class='container' style='padding-top: 30px'>
     <div class=\"list-group\">
         <button type=\"button\" class=\"list-group-item list-group-item-action list-group-item-primary\">Task Title: " . $task_title . " <span class='badge badge-warning' style='margin-left: 15px'>" . $task_status . "</span></button>
         <button type=\"button\" class=\"list-group-item list-group-item-action\">Description: " . $task_description . "</button>
@@ -121,13 +121,14 @@ while ($row = pg_fetch_array($query)) {
                       <span>" . $error . "</span>
                     </div>
                   </form>
-                </div>";
+                </div>
+	</div>";
     } else {
         echo "
                     
                     
                     
-    <div class='container' style='padding: 30px 0'>
+    <div class='container' style='padding-top: 30px'>
     <div class=\"list-group\">
         <button type=\"button\" class=\"list-group-item list-group-item-action list-group-item-primary\">Task Title: " . $task_title . " <span class='badge badge-danger' style='margin-left: 15px'>" . $task_status . "</span></button>
         <button type=\"button\" class=\"list-group-item list-group-item-action\">Description: " . $task_description . "</button>
