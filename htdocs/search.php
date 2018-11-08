@@ -13,10 +13,6 @@ if (isset($_POST['search'])) {
 		AND m.task_title LIKE '%{$search}%'
 		GROUP BY m.task_id, m.user_id, m.task_title, m.description, m.status, m.date, m.start_time, m.end_time, b.user_id, b.amount
 		ORDER BY m.status DESC, m.task_id ASC, b.amount DESC");
-    $rows = pg_num_rows($query);
-    if ($rows = 0) {
-        $error = 'Invalid query provided, please try again!';
-    }
 }
 if (isset($_POST['submit'])) {
     $bid_amount = $_POST['bid'];
@@ -102,9 +98,16 @@ while ($row = pg_fetch_array($query)) {
     $task_id = $row['task_id'];
     $amount = $row['amount'];
     echo "
-				<div class='container' style='padding: 30px 0'>
+				</div>
+				<div class='container' style='padding-top: 30px;'>
 				<div class=\"list-group\">
-					<button type=\"button\" class=\"list-group-item list-group-item-action list-group-item-primary\">Task Title: " . $task_title . " <span class='badge badge-danger' style='margin-left: 15px'>" . $task_status . "</span></button>
+					<button type=\"button\" class=\"list-group-item list-group-item-action list-group-item-primary\">Task Title: " . $task_title . " ";
+					
+					if ($task_status == 'no_bids') {echo"<span class='badge badge-danger' style='margin-left: 15px'>" . $task_status . "</span></button>";}
+					else if ($task_status == 'in_progress') {echo"<span class='badge badge-warning' style='margin-left: 15px'>" . $task_status . "</span></button>";}
+					else {echo"<span class='badge badge-success' style='margin-left: 15px'>" . $task_status . "</span></button>";}
+					
+					echo"
 					<button type=\"button\" class=\"list-group-item list-group-item-action\">Description: " . $task_description . "</button>
 					<button type=\"button\" class=\"list-group-item list-group-item-action\">Date: " . $task_date . "</button>
 					<button type=\"button\" class=\"list-group-item list-group-item-action\">Start Time: " . $task_starttime . "</button>
