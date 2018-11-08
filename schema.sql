@@ -116,7 +116,7 @@ CREATE OR REPLACE FUNCTION remove_multitask()
 	BEGIN
 		IF ((SELECT COUNT(*) FROM task_managed_by WHERE user_id = NEW.user_id AND date = NEW.date AND start_time <= NEW.start_time
 			AND end_time >= NEW.start_time) >= 1) THEN
-			RAISE EXCEPTION 'A user cannot be at two places at once! Update / Add task operation voided';
+			RAISE EXCEPTION 'A user cannot be at two places at once!';
 			RETURN NULL;
 		END IF;
 		RETURN NEW;
