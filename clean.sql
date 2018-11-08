@@ -5,3 +5,4 @@ DROP FUNCTION add_bid() CASCADE;
 DROP FUNCTION remove_invalid_bids() CASCADE;
 DROP FUNCTION disable_delete_admin() CASCADE;
 DROP FUNCTION remove_multitask() CASCADE;
+DROP FUNCTION prevent_outbidding_by_same_user() CASCADE;

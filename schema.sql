@@ -135,3 +135,24 @@ BEFORE INSERT
 ON task_managed_by
 FOR EACH ROW
 EXECUTE PROCEDURE remove_multitask();
+
+CREATE FUNCTION prevent_outbidding_by_same_user()
+	RETURNS TRIGGER AS $$
+	DECLARE
+		current_highest_user VARCHAR(128) := (SELECT user_id FROM task_bid_by WHERE task_id = NEW.task_id GROUP BY user_id, amount HAVING amount >= ALL (SELECT amount from task_bid_by WHERE task_id = NEW.task_id));
+	BEGIN
+		IF (current_highest_user = NEW.user_id) THEN
+			RAISE EXCEPTION 'Outbidding yourself is silly';
+			RETURN NULL;
+		END IF;
+		RETURN NEW;
+	END;
+	$$ LANGUAGE PLPGSQL;
+
+CREATE TRIGGER prevent_outbidding_by_same_user
+	-- You stupid? trigger
+	BEFORE INSERT
+	ON task_bid_by
+	FOR EACH ROW
+	EXECUTE PROCEDURE prevent_outbidding_by_same_user();
+
