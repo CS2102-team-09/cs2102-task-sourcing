@@ -150,11 +150,6 @@
             $description = $_POST['generic_description']. ' Number of items to be mounted: '.$_POST['items'].'. Item model and additional comments: '.$_POST['description'];
         }
 
-        echo "
-            $task_title
-            $description
-        ";
-
         $date = $_POST['date'];
         $start_time = $_POST['start_time'];
         $end_time = $_POST['end_time'];
