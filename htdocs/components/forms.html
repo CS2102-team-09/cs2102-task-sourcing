@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<!--help moving form-->
+<form action="" method="post">
+    <input type="hidden" name="generic_title" value="$task_title">
+    <input type="hidden" name="generic_title" value="$description">
+    <input type="hidden" name="title" value="Mounting & Installation">
+    <div class="form-group row">
+        <label for="from" class="col-sm-2 col-form-label">From:</label>
+        <div class="col-sm-10">
+            <input name="from" type="text" class="form-control" id="from" placeholder="Meet me at..." required>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="to" class="col-sm-2 col-form-label">To:</label>
+        <div class="col-sm-10">
+            <input name="to" type="text" class="form-control" id="to" placeholder="Moving to..." required>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="items" class="col-sm-3 col-form-label">Number of bulky items</label>
+        <div class="col-sm-9">
+            <input name="items" type="text" class="form-control" id="items" placeholder="3" required>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="description">Additional Description</label>
+        <textarea name="description" class="form-control" id="description" rows="3"></textarea>
+    </div>
+    <div class="form-group row">
+        <label for="example-date-input" class="col-2 col-form-label">Date</label>
+        <div class="col-10">
+            <input name="date" class="form-control" type="date" value="2018-10-19" id="example-date-input">
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="start_time" class="col-2 col-form-label">Start Time</label>
+        <div class="col-10">
+            <input name="start_time" class="form-control" type="time" value="13:45:00" id="start_time">
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="end_time" class="col-2 col-form-label">End Time</label>
+        <div class="col-10">
+            <input name="end_time" class="form-control" type="time" value="13:45:00" id="end_time">
+        </div>
+    </div>
+    <div class="form-group"><input name="submit" class="btn btn-success" type="submit" value=" Submit task "></div>
+</form>
+
+<form action="" method="post">
+    <input type="hidden" name="generic_title" value="$task_title">
+    <input type="hidden" name="generic_title" value="$description">
+    <input type="hidden" name="title" value="Mounting & Installation">
+
+    <div class="form-group row">
+        <label for="items" class="col-sm-4 col-form-label">Number of items to be mounted</label>
+        <div class="col-sm-8">
+            <input name="items" type="text" class="form-control" id="items" placeholder="3" required>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="description">Item Description</label>
+        <textarea name="description" class="form-control" id="description" rows="3" placeholder="Item model & special requests"></textarea>
+    </div>
+    <div class="form-group row">
+        <label for="example-date-input" class="col-2 col-form-label">Date</label>
+        <div class="col-10">
+            <input name="date" class="form-control" type="date" value="2018-10-19" id="example-date-input">
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="start_time" class="col-2 col-form-label">Start Time</label>
+        <div class="col-10">
+            <input name="start_time" class="form-control" type="time" value="13:45:00" id="start_time">
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="end_time" class="col-2 col-form-label">End Time</label>
+        <div class="col-10">
+            <input name="end_time" class="form-control" type="time" value="13:45:00" id="end_time">
+        </div>
+    </div>
+    <div class="form-group"><input name="mounting" class="btn btn-success" type="submit" value=" Submit task "></div>
+</form>
+
+
+</body>
+</html>
