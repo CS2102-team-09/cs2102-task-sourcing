@@ -1,5 +1,6 @@
 <?php
 include('session.php');
+include('./components/profile_header.php');
 $connection = pg_connect("host=localhost port=5432 dbname=Project1 user=postgres password=postgres");
 
 $login_user = $_SESSION['login_user'];
@@ -15,7 +16,7 @@ ORDER BY m.status DESC, m.task_id ASC, b.amount DESC");
 if (!$query) {
     echo "Invalid query provided.";
 }
-$error='';
+$error = '';
 if (isset($_POST['submit'])) {
     $bid_amount = $_POST['bid'];
     $taskid = $_POST['task_id'];
@@ -30,62 +31,10 @@ if (isset($_POST['submit'])) {
 }
 ?>
 
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Tasks available</title>
-    <link href="style.css" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-</head>
-<body>
-
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">TaskSource</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-                <a class="nav-link" href="profile.php"> Home <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="bids.php"> My Bids <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="createtask.php"> Create New <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item active">
-                <a class="nav-link" href="tasks.php"> All Tasks <span class="sr-only">(current)</span></a>
-            </li>
-        </ul>
-
-        <a class="btn btn-outline-success my-2 my-sm-0" href="logout.php">Logout</a>
-
-    </div>
-</nav>
-
-<div class="container" style="padding-top: 30px"></div>
-
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-        crossorigin="anonymous">
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-        crossorigin="anonymous">
-</script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-        crossorigin="anonymous">
-</script>
 <?php
 $i = 0;
 // output data of each row
-while($row = pg_fetch_array($query)) {
+while ($row = pg_fetch_array($query)) {
     $i++;
     $task_owner = $row['owner'];
     $task_title = $row["task_title"];
@@ -223,5 +172,3 @@ while($row = pg_fetch_array($query)) {
     }
 }
 ?>
-</body>
-</html>

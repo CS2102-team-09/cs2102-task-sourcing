@@ -1,6 +1,6 @@
 <?php
 include('session.php');
-include('./components/profile_header.html');
+include('./components/profile_header.php');
 ?>
 <!DOCTYPE html>
 <html>
