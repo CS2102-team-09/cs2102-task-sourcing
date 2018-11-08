@@ -122,6 +122,19 @@ while ($row = pg_fetch_array($query)) {
                     </div>
                   </form>
                 </div>
+
+            <form action='' method='post'>
+            <div class='container' style='padding: 10px 5px'>
+                <input type='hidden' id='task_id' name='task_id' value='" . $task_id . "'>
+                <input type='hidden' id='amount' name='amount' value='" . $amount . "'>
+                <div class='form-group'>
+                <div class='form-row'>
+                <button class='btn btn-primary' name='close' type='submit' >Accept</button>
+                </div>
+                </div>
+                <span>" . $error . "</span>
+            </div>
+            </form>
 	</div>";
     } else {
         echo "
@@ -138,10 +151,7 @@ while ($row = pg_fetch_array($query)) {
         <button type=\"button\" class=\"list-group-item list-group-item-action\">Task Owner: " . $task_owner . "</button>
         <button type=\"button\" class=\"list-group-item list-group-item-action\">Current Bid: $" . $amount . "</button>
         
-        </div>";
-
-		if ($task_status != 'completed') {	
-		echo"
+        </div>
             <button id='editbutton" . $i . "' type='button' class='btn btn-success'>Edit</button>
                 <script type='text/javascript'>
                     $('#editbutton" . $i . "').on('click', function (e) {
@@ -166,24 +176,7 @@ while ($row = pg_fetch_array($query)) {
                       <span>" . $error . "</span>
                     </div>
                   </form>
-                </div>";
-    }
-    if ($amount != 0) {
-        echo "
-            <form action='' method='post'>
-            <div class='container' style='padding: 10px 5px'>
-                <input type='hidden' id='task_id' name='task_id' value='" . $task_id . "'>
-                <input type='hidden' id='amount' name='amount' value='" . $amount . "'>
-                <div class='form-group'>
-                <div class='form-row'>
-                <button class='btn btn-primary' name='close' type='submit' >Accept</button>
                 </div>
-                </div>
-                <span>" . $error . "</span>
-            </div>
-            </form>";
-    }
-    echo "
       </div>
     </div>";
 }}

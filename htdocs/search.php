@@ -178,7 +178,7 @@ while ($row = pg_fetch_array($query)) {
 								<input type='hidden' id='amount' name='amount' value='" . $amount . "'>
 								<div class='form-group'>
 								<div class='form-row'>
-								<button class='btn btn-success' name='close' type='submit' style='margin-left: 3px'>Close</button>
+								<button class='btn btn-primary' name='close' type='submit' style='margin-left: 3px'>Accept</button>
 								</div>
 								</div>
 								<span>" . $error . "</span>
