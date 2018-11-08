@@ -1,6 +1,17 @@
 <?php
 include('session.php');
 include('./components/profile_header.php');
+$error_message = "";
+
+function get_string_between($string, $start, $end){
+    $string = ' ' . $string;
+    $ini = strpos($string, $start);
+    if ($ini == 0) return '';
+    $ini += strlen($start);
+    $len = strpos($string, $end, $ini) - $ini;
+    return substr($string, $ini, $len);
+}
+
 $login_user = $_SESSION['login_user'];
 $connection = pg_connect("host=localhost port=5432 dbname=Project1 user=postgres password=postgres");
 $query = pg_query($connection, "SELECT m.task_id, m.user_id AS owner, m.task_title, m.description, m.status, m.date, m.start_time, m.end_time, b.user_id AS bidder, (CASE WHEN b.amount is null then 0 else b.amount END) AS amount
@@ -21,12 +32,25 @@ if (isset($_POST['update'])) {
     $task_date = $_POST['task_date'];
     $task_starttime = $_POST['task_starttime'];
     $task_endtime = $_POST['task_endtime'];
+
+    set_error_handler(function($errno, $errstr) use( &$error_message) { $error_message = $errstr; });
     $update_task = pg_query($connection, "UPDATE task_managed_by SET task_title='$task_title', description='$task_description', date='$task_date', start_time='$task_starttime', end_time='$task_endtime'
                                                 WHERE task_id='$taskid' ");
+    restore_error_handler();
+    $error_message = get_string_between($error_message, 'ERROR:', 'CONTEXT:');
+    $error_message = str_replace(array("\r", "\n"), '', $error_message);
+
     if ($update_task) {
         header("location: profile.php");
     } else {
-        $error = 'Invalid query provided, please try again!';
+//        $error = 'Invalid query provided, please try again!';
+        $error_message = (strpos($error_message, 'A user cannot be at two places at once!') !== false)? 'A user cannot be at two places at once!' : 'Some fields were filled out incorrectly. Please try again.';
+        echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+              '. $error_message .'
+            </div>';
     }
 }
 if (isset($_POST['close'])) {
@@ -135,7 +159,7 @@ while ($row = pg_fetch_array($query)) {
                 <span>" . $error . "</span>
             </div>
             </form>
-	</div>";
+    </div>";
     } else {
         echo "
                     
