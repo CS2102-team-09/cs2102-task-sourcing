@@ -140,29 +140,6 @@ while ($row = pg_fetch_array($query)) {
         <button type=\"button\" class=\"list-group-item list-group-item-action\">Winning Bid: $" . $amount . "</button>
         
         </div>
-            <button id='addbidbutton" . $i . "' type='button' class='btn btn-success'>Add bid</button>
-                <script type='text/javascript'>
-                    $('#addbidbutton" . $i . "').on('click', function (e) {
-                         var modal = document.getElementById('addbid" . $i . "');
-                         modal.style.display = 'inline-block';
-                    })
-                </script>
-                <div style='display:none' id='addbid" . $i . "' >
-                    <form action='' method='post'>
-                    <div class='container'>
-                      <input type='hidden' id='task_id' name='task_id' value='" . $task_id . "'>
-                      <input type='hidden' id='user_id' name='user_id' value='" . $task_owner . "'>
-                      <div class='form-group'>
-                      <div class='form-row'>
-                        <input type='text' class='form-control' placeholder='Enter Bid Amount' name='bid' required>
-                        <button class='btn btn-danger' name='submit' type='submit' >Submit Bid</button>
-                      </div>
-                      </div>
-                      <span>" . $error . "</span>
-                    </div>
-                  </form>
-                </div>
-          </div>
         </div>
                 ";
     }

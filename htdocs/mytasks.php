@@ -137,7 +137,10 @@ while ($row = pg_fetch_array($query)) {
         <button type=\"button\" class=\"list-group-item list-group-item-action\">Task Owner: " . $task_owner . "</button>
         <button type=\"button\" class=\"list-group-item list-group-item-action\">Current Bid: $" . $amount . "</button>
         
-        </div>
+        </div>";
+
+		if ($task_status != 'completed') {	
+		echo"
             <button id='editbutton" . $i . "' type='button' class='btn btn-success'>Edit</button>
                 <script type='text/javascript'>
                     $('#editbutton" . $i . "').on('click', function (e) {
@@ -164,7 +167,7 @@ while ($row = pg_fetch_array($query)) {
                   </form>
                 </div>";
     }
-    if ($task_status != 'completed' and $amount != 0) {
+    if ($amount != 0) {
         echo "
             <form action='' method='post'>
             <div class='container' style='padding: 10px 5px'>
@@ -182,5 +185,5 @@ while ($row = pg_fetch_array($query)) {
     echo "
       </div>
     </div>";
-}
+}}
 ?>
