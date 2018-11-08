@@ -25,11 +25,21 @@ if (isset($_POST['submit'])) {
 		// SQL query to fetch information of registerd users and finds user match.
 		$query = pg_query($connection, "INSERT INTO task_managed_by (task_title, user_id, date, start_time, end_time, description) VALUES ('$title', '$user_id', '$date', '$start_time', '$end_time', '$description')");
 		if ($query) {
-			echo "Added successfully!";
-			header("location: profile.php"); // Redirecting To Other Page
+			echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+			  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			  </button>
+			  You have successfully created a task!
+			</div>';
+			//header("location: profile.php"); // Redirecting To Other Page
 		} else {
 			$error = $end_time;
-			echo "Adding failed!";
+			echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+			  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			  </button>
+			  Some fields were filled out incorrectly. Please try again.
+			</div>';
 		}
 		pg_close($connection); // Closing Connection
 	}
@@ -39,7 +49,7 @@ if (isset($_POST['submit'])) {
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Title</title>
+    <title>Create a Task</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
