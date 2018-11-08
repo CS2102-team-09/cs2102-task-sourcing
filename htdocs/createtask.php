@@ -1,48 +1,68 @@
 <?php
 include('session.php');
 include('./components/profile_header.php');
-if (isset($_POST['submit'])) {
-	if (empty($_POST['title']) || empty($_POST['description'])) {
-		$error = "Please fill in all the fields!";
-	} else {
-		// Define all attributes to store
-		$title = $_POST['title'];
-		$description = $_POST['description'];
-		$date = $_POST['date'];
-		$start_time = $_POST['start_time'];
-		$end_time = $_POST['end_time'];
+$error_message = "";
 
-		$user_id = $_SESSION['login_user'];
+function get_string_between($string, $start, $end){
+    $string = ' ' . $string;
+    $ini = strpos($string, $start);
+    if ($ini == 0) return '';
+    $ini += strlen($start);
+    $len = strpos($string, $end, $ini) - $ini;
+    return substr($string, $ini, $len);
+}
+
+if (isset($_POST['submit'])) {
+    if (empty($_POST['title']) || empty($_POST['description'])) {
+        $error = "Please fill in all the fields!";
+    } else {
+        // Define all attributes to store
+        $title = $_POST['title'];
+        $description = $_POST['description'];
+        $date = $_POST['date'];
+        $start_time = $_POST['start_time'];
+        $end_time = $_POST['end_time'];
+
+        $user_id = $_SESSION['login_user'];
 
         echo "<script>console.log( 'Debug Objects: " . $date . "' );</script>";
         echo "<script>console.log( 'Debug Objects: " . $start_time . "' );</script>";
         echo "<script>console.log( 'Debug Objects: " . $end_time . "' );</script>";
 
-		// Establishing Connection with Server by passing server_name, user_id and password as a parameter
-		$connection = pg_connect("host=localhost port=5432 dbname=Project1 user=postgres password=postgres");
+        // Establishing Connection with Server by passing server_name, user_id and password as a parameter
+        $connection = pg_connect("host=localhost port=5432 dbname=Project1 user=postgres password=postgres");
 
-		
-		// SQL query to fetch information of registerd users and finds user match.
-		$query = pg_query($connection, "INSERT INTO task_managed_by (task_title, user_id, date, start_time, end_time, description) VALUES ('$title', '$user_id', '$date', '$start_time', '$end_time', '$description')");
-		if ($query) {
-			echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
-			  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-				<span aria-hidden="true">&times;</span>
-			  </button>
-			  You have successfully created a task!
-			</div>';
-			//header("location: profile.php"); // Redirecting To Other Page
-		} else {
-			$error = $end_time;
-			echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-			  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-				<span aria-hidden="true">&times;</span>
-			  </button>
-			  Some fields were filled out incorrectly. Please try again.
-			</div>';
-		}
-		pg_close($connection); // Closing Connection
-	}
+
+        set_error_handler(function($errno, $errstr) use( &$error_message) { $error_message = $errstr; });
+        // SQL query to fetch information of registerd users and finds user match.
+        $query = pg_query($connection, "INSERT INTO task_managed_by (task_title, user_id, date, start_time, end_time, description) VALUES ('$title', '$user_id', '$date', '$start_time', '$end_time', '$description')");
+        restore_error_handler();
+
+        $error_message = get_string_between($error_message, 'ERROR:', 'CONTEXT:');
+        $error_message = str_replace(array("\r", "\n"), '', $error_message);
+
+
+
+        if ($query) {
+            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+              You have successfully created a task!
+            </div>';
+            //header("location: profile.php"); // Redirecting To Other Page
+        } else {
+            $error = $end_time;
+            $error_message = (strpos($error_message, 'A user cannot be at two places at once!') !== false)? 'A user cannot be at two places at once!' : 'Some fields were filled out incorrectly. Please try again.';
+            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+              '. $error_message .'
+            </div>';
+        }
+        pg_close($connection); // Closing Connection
+    }
 }
 ?>
 
