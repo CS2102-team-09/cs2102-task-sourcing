@@ -127,7 +127,7 @@ CREATE TRIGGER remove_multitask_update
 BEFORE UPDATE
 ON task_managed_by
 FOR EACH ROW
-WHEN (OLD.status IS NOT DISTINCT FROM NEW.status)
+WHEN ((OLD.status IS NOT DISTINCT FROM NEW.status) AND (OLD.date IS DISTINCT FROM NEW.date))
 EXECUTE PROCEDURE remove_multitask();
 
 CREATE TRIGGER remove_multitask_insert
